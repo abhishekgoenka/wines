@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 using Wines.DataLayer.DataAccess;
 
 namespace Wines.WinForm.BCL
 {
     /// <summary>
-    /// Singleton class for Authentication 
+    ///     Singleton class for Authentication
     /// </summary>
     internal sealed class Auth
     {
         private static Auth instance;
         private static readonly object padlock = new object();
 
-        public string Username { get; private set; }
-        public Boolean IsAuthenticated { get; private set; }
-
         private Auth()
         {
         }
+
+        public string Username { get; private set; }
+        public bool IsAuthenticated { get; private set; }
 
         public static Auth Instance()
         {
@@ -38,17 +32,17 @@ namespace Wines.WinForm.BCL
         }
 
         /// <summary>
-        /// Login
+        ///     Login
         /// </summary>
         /// <param name="username">User name</param>
         /// <param name="password">password</param>
         /// <returns>True if login is successful</returns>
         public bool SetUser(string username, string password)
         {
-            SQLiteCommand command = DataAccess.CreateCommand(CommandType.Text);
+            var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText = "Select Id from Users where Username = @username and Userpass = @password";
 
-            SQLiteParameter parameter = command.CreateParameter();
+            var parameter = command.CreateParameter();
             parameter.ParameterName = "@username";
             parameter.Value = username;
             parameter.DbType = DbType.String;
@@ -61,7 +55,7 @@ namespace Wines.WinForm.BCL
             command.Parameters.Add(parameter);
 
             var result = DataAccess.ExecuteScalar(command);
-            if (String.IsNullOrEmpty(result))
+            if (string.IsNullOrEmpty(result))
             {
                 return false;
             }
