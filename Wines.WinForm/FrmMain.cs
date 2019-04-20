@@ -45,5 +45,11 @@ namespace Wines.WinForm
             brand.ShowDialog(this);
 
         }
+
+        private void MenuBranch_Click(object sender, EventArgs e)
+        {
+            FrmBranch branch = new FrmBranch();
+            branch.ShowDialog(this);
+        }
     }
 }
