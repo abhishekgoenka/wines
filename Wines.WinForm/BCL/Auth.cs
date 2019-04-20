@@ -37,10 +37,10 @@ namespace Wines.WinForm.BCL
         /// <param name="username">User name</param>
         /// <param name="password">password</param>
         /// <returns>True if login is successful</returns>
-        public bool SetUser(string username, string password)
+        public bool SetUser(int shopID, string username, string password)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
-            command.CommandText = "Select Id from Users where Username = @username and Userpass = @password";
+            command.CommandText = "Select Id, FullName from Users where FullName = @username and Userpass = @password and Shop_ID=@shopID";
 
             var parameter = command.CreateParameter();
             parameter.ParameterName = "@username";
@@ -52,6 +52,12 @@ namespace Wines.WinForm.BCL
             parameter.ParameterName = "@password";
             parameter.Value = password;
             parameter.DbType = DbType.String;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@shopID";
+            parameter.Value = shopID;
+            parameter.DbType = DbType.Int32;
             command.Parameters.Add(parameter);
 
             var result = DataAccess.ExecuteScalar(command);

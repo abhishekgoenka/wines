@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using Microsoft.Win32;
 using System.Data.SQLite;
 using NLog;
 
