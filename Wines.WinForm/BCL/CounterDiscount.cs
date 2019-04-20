@@ -14,21 +14,19 @@ namespace Wines.WinForm.BCL
         /// </summary>
         /// <param name="ID"></param>
         /// <param name="Shop_ID"></param>
-        /// <param name="Branch_Name"></param>
-        /// <param name="Box"></param>
-        /// <param name="Address"></param>
-        /// <param name="Active"></param>
-        /// <param name="MobileNo"></param>
-        /// <param name="Advance"></param>
+        /// <param name="User_ID"></param>
+        /// <param name="Discount_Date"></param>
+        /// <param name="Modify_Date"></param>
+        /// <param name="Discount_Amt"></param>
+        /// <param name="Description"></param>
         /// <param name="reserve1"></param>
         /// <returns></returns>
-        public int Add(long lngShopID, string strBranchName, string strAddress, bool bActive, 
-                       string strMobileNo, decimal lngAdvance, string strReserve1)
+        public int Add(long lngShopID, long lngUserID, System.DateTime dtDiscountDate, decimal DiscountAmt, string strDescription, string strReserve1)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "INSERT INTO Branch (Shop_ID, Branch_Name, Address, Active, MobileNo, Advance, Reserve1) " +
-                "VALUES (@Shop_ID, @Branch_Name, @Address, @Active, @MobileNo, @Advance, @Reserve1)";
+                "INSERT INTO Counter_Discount (Shop_ID, User_ID, Discount_Date, Modify_Date, Discount_Amt, Description, Reserve1) " +
+                "VALUES (@Shop_ID, @User_ID, @Discount_Date, @Modify_Date, @Discount_Amt, @Description, @Reserve1)";
 
             var parameter = command.CreateParameter();
             parameter.ParameterName = "@Shop_ID";
@@ -37,33 +35,33 @@ namespace Wines.WinForm.BCL
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Branch_Name";
-            parameter.Value = strBranchName;
-            parameter.DbType = DbType.String;
-            command.Parameters.Add(parameter);
-
-            parameter = command.CreateParameter();
-            parameter.ParameterName = "@Address";
-            parameter.Value = strAddress;
-            parameter.DbType = DbType.String;
-            command.Parameters.Add(parameter);
-
-            parameter = command.CreateParameter();
-            parameter.ParameterName = "@Active";
-            parameter.Value = bActive;
-            parameter.DbType = DbType.Boolean;
-            command.Parameters.Add(parameter);
-
-            parameter = command.CreateParameter();
-            parameter.ParameterName = "@MobileNo";
-            parameter.Value = strMobileNo;
-            parameter.DbType = DbType.String;
-            command.Parameters.Add(parameter);
-
-            parameter = command.CreateParameter();
-            parameter.ParameterName = "@Advance";
-            parameter.Value = lngAdvance;
+            parameter.ParameterName = "@User_ID";
+            parameter.Value = lngUserID;
             parameter.DbType = DbType.Int64;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Discount_Date";
+            parameter.Value = dtDiscountDate;
+            parameter.DbType = DbType.DateTime;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Modify_Date";
+            parameter.Value = System.DateTime.Today;
+            parameter.DbType = DbType.DateTime;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Discount_Amt";
+            parameter.Value = DiscountAmt;
+            parameter.DbType = DbType.Int64;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Description";
+            parameter.Value = strDescription;
+            parameter.DbType = DbType.String;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
@@ -89,13 +87,13 @@ namespace Wines.WinForm.BCL
         /// <param name="Advance"></param>
         /// <param name="reserve1"></param>
         /// <returns></returns>
-        public int Update(long lngID, long lngShopID, string strBranchName, string strAddress, bool bActive,
-                       string strMobileNo, decimal lngAdvance, string strReserve1)
+        public int Update(long lngID, long lngShopID, long lngUserID, System.DateTime dtDiscountDate, 
+                                        decimal DiscountAmt, string strDescription, string strReserve1)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "UPDATE Branch SET Shop_ID = @Shop_ID, Branch_Name = @Branch_Name, Address = @Address, " +
-                " Active = @Active, MobileNo = @MobileNo, Reserve1 = @Reserve1 WHERE ID = @ID";
+                "UPDATE Counter_Discount SET Shop_ID = @Shop_ID, User_ID = @User_ID, Discount_Date = @Discount_Date, Modify_Date = @Modify_Date, " +
+                " Discount_Amt = @Discount_Amt, Description = @Description, Reserve1 = @Reserve1 WHERE ID = @ID";
 
             var parameter = command.CreateParameter();
             parameter.ParameterName = "@Shop_ID";
@@ -104,26 +102,32 @@ namespace Wines.WinForm.BCL
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Branch_Name";
-            parameter.Value = strBranchName;
-            parameter.DbType = DbType.String;
+            parameter.ParameterName = "@User_ID";
+            parameter.Value = lngUserID;
+            parameter.DbType = DbType.Int64;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Address";
-            parameter.Value = strAddress;
-            parameter.DbType = DbType.String;
+            parameter.ParameterName = "@Discount_Date";
+            parameter.Value = dtDiscountDate;
+            parameter.DbType = DbType.DateTime;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Active";
-            parameter.Value = bActive;
-            parameter.DbType = DbType.Boolean;
+            parameter.ParameterName = "@Modify_Date";
+            parameter.Value = System.DateTime.Today;
+            parameter.DbType = DbType.DateTime;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@MobileNo";
-            parameter.Value = strMobileNo;
+            parameter.ParameterName = "@Discount_Amt";
+            parameter.Value = DiscountAmt;
+            parameter.DbType = DbType.Int64;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Description";
+            parameter.Value = strDescription;
             parameter.DbType = DbType.String;
             command.Parameters.Add(parameter);
 
@@ -143,14 +147,15 @@ namespace Wines.WinForm.BCL
         }
 
         /// <summary>
-        ///     Returns all the Branchs in system
+        ///     Returns all the Discounts in system
         /// </summary>
         /// <returns></returns>
-        public List<CounterDiscountModel> GetAllBranchs()
+        public List<CounterDiscountModel> GetAllCounterDiscounts()
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "SELECT ID, Shop_ID, Branch_Name, Address, Active, MobileNo, Advance, Reserve1 FROM Branch;";
+                "SELECT ID, Shop_ID, User_ID, Discount_Date, Modify_Date, Discount_Amt, Description, Reserve1 FROM Counter_Discount " +
+                " ORDER BY Modify_Date;";
             return Helper.ConvertDataTable<CounterDiscountModel>(DataAccess.ExecuteSelectCommand(command));
         }
 
@@ -163,7 +168,7 @@ namespace Wines.WinForm.BCL
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "DELETE FROM Branch WHERE ID = @ID ";
+                "DELETE FROM Counter_Discount WHERE ID = @ID ";
 
             var parameter = command.CreateParameter();
             parameter.ParameterName = "@ID";

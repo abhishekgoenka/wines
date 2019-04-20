@@ -16,6 +16,7 @@ namespace Wines.WinForm.BCL
         {
         }
 
+        public long User_ID{ get; private set; }
         public string Username { get; private set; }
         public bool IsAuthenticated { get; private set; }
 
@@ -70,6 +71,7 @@ namespace Wines.WinForm.BCL
             // authentication successful
             IsAuthenticated = true;
             Username = username;
+            User_ID = 1;
             return true;
         }
     }

@@ -8,14 +8,10 @@ namespace Wines.WinForm.Forms
 {
     public partial class FrmCounterDiscount : Form
     {
-        private Int64 m_BranchID = 0;
+        private Int64 m_CounterDiscount_ID= 0;
         public FrmCounterDiscount()
         {
             InitializeComponent();
-        }
-
-        private void Label2_Click(object sender, EventArgs e)
-        {
         }
 
         private void FrmCounterDiscount_Load(object sender, EventArgs e)
@@ -32,11 +28,11 @@ namespace Wines.WinForm.Forms
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             FillGrid();
 
-            grid.Columns["Branch_Name"].Width = 250;
-            grid.Columns["Active"].Width = 100;
-            grid.Columns["Address"].Width = 200;
-            grid.Columns["MobileNo"].Width = 150;
-            grid.Columns["Advance"].Width = 120;
+            //grid.Columns["Branch_Name"].Width = 250;
+            //grid.Columns["Active"].Width = 100;
+            //grid.Columns["Address"].Width = 200;
+            //grid.Columns["MobileNo"].Width = 150;
+            //grid.Columns["Advance"].Width = 120;
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -48,29 +44,29 @@ namespace Wines.WinForm.Forms
             BtnDelete.Enabled = false;
             BtnSave.Enabled = true;
             BtnCancel.Enabled = true;
-            m_BranchID = 0;
+            m_CounterDiscount_ID = 0;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (CboShop.Items[CboShop.SelectedIndex] is ShopModel selectedShop)
             {
-                var Branch = new Branch();
+                var CounterDis = new CounterDiscount();
                 var result = 0;
 
-                if (m_BranchID > 0)
+                if (m_CounterDiscount_ID > 0)
                 {
                     // we are in edit mode
 //                    public int Update(long lngID, long lngShopID, string strBranchName, string strAddress, bool bActive,
   //                                 string strMobileNo, long lngAdvance, string strReserve1)
 
-                    result = Branch.Update(m_BranchID, selectedShop.ID, TxtBranchName.Text, TxtAddress.Text, cbkActive.Checked, 
-                        TxtMobile.Text, NBAdvance.Value, TxtReserve.Text);
+                    result = CounterDis.Update(m_CounterDiscount_ID, selectedShop.ID, 1, dtDiscountDate.Value, 
+                                        NBDiscountAmt.Value, TxtDescription.Text, TxtReserve.Text);
                 }
                 else
                 {
-                    result = Branch.Add(selectedShop.ID, TxtBranchName.Text, TxtAddress.Text, cbkActive.Checked,
-                        TxtMobile.Text, NBAdvance.Value, TxtReserve.Text);
+                    result = CounterDis.Add(selectedShop.ID, 1, dtDiscountDate.Value,
+                                        NBDiscountAmt.Value, TxtDescription.Text, TxtReserve.Text);
 
                 }
 
@@ -102,8 +98,8 @@ namespace Wines.WinForm.Forms
 
         private void FillGrid()
         {
-            BCL.Branch branch = new BCL.Branch();
-            grid.DataSource = branch.GetAllBranchs();
+            BCL.CounterDiscount CounterDis = new BCL.CounterDiscount();
+            grid.DataSource = CounterDis.GetAllCounterDiscounts();
             if (grid.Columns["ID"] != null)
             {
                 grid.Columns["ID"].Visible = false;
@@ -122,19 +118,17 @@ namespace Wines.WinForm.Forms
                 return;
 
             var id = Convert.ToInt64(grid.SelectedRows[0].Cells["ID"].Value);
-            Branch Branch = new Branch();
-            BranchModel BranchModel = Branch.GetAllBranchs().FirstOrDefault(b => b.ID == id);
-            if (BranchModel != null)
+            CounterDiscount CounterDis = new CounterDiscount();
+            CounterDiscountModel CounterDisMod = CounterDis.GetAllCounterDiscounts().FirstOrDefault(b => b.ID == id);
+            if (CounterDisMod != null)
             {
                 //todo: Need to fix selected shop
 
-                m_BranchID = BranchModel.ID;
-                TxtBranchName.Text = BranchModel.Branch_Name;
-                cbkActive.Checked = BranchModel.Active;
-                TxtMobile.Text = BranchModel.MobileNo;
-                TxtAddress.Text= BranchModel.Address;
-                NBAdvance.Value = BranchModel.Advance;
-                TxtReserve.Text = BranchModel.Reserve1;
+                m_CounterDiscount_ID = CounterDisMod.ID;
+                dtDiscountDate.Value= CounterDisMod.Discount_Date;
+                NBDiscountAmt.Value = CounterDisMod.Discount_Amt;
+                TxtDescription.Text= CounterDisMod.Description;
+                TxtReserve.Text = CounterDisMod.Reserve1;
             }
 
         }
@@ -145,7 +139,7 @@ namespace Wines.WinForm.Forms
             if (result == DialogResult.Yes)
             {
                 BCL.Branch ObjBranch = new Branch();
-                ObjBranch.DeleteBranch(m_BranchID);
+                ObjBranch.DeleteBranch(m_CounterDiscount_ID);
                 FillGrid();
             }
         }
@@ -164,6 +158,11 @@ namespace Wines.WinForm.Forms
         private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void cmdClose_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
