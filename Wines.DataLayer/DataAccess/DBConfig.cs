@@ -15,9 +15,11 @@ namespace Wines.DataLayer.DataAccess
             string strDbPath = key.GetValue("DBPath").ToString();
 
             if (strDbPath.Length == 0)
+            {
                 strDbPath = "WinesData.db";
+            }
 
-                DbConnectionString = $"Data Source={strDbPath};Version=3;";
+            DbConnectionString = $"Data Source={strDbPath};Version=3;";
         }
 
         public static string DbConnectionString { get; }

@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Data;
 using System.Windows.Forms;
 using NLog;
 using Wines.WinForm.BCL;
-using System.Data;
+using Wines.WinForm.Models;
 
 namespace Wines.WinForm.Forms
 {
@@ -10,48 +11,36 @@ namespace Wines.WinForm.Forms
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public class ComboboxItem : Object
-        {
-            public string Text { get; set; }
-            public object Value { get; set; }
-
-            public override string ToString()
-            {
-                return Text;
-            }
-        }
-
         public FrmLogin()
         {
             InitializeComponent();
 
-            BCL.Shop ObjShop = new BCL.Shop();
-            DataTable dtShopes = ObjShop.GetAllShopes();
-
-            foreach (DataRow drShop in dtShopes.Rows)
+            var shop = new Shop();
+            foreach (var shopModel in shop.GetAllShops())
             {
-                ComboboxItem item = new ComboboxItem();
-                item.Text = drShop.Field<string>("Shop_Name"); //.ItemArray["Shop_Name"].ToString();
-                item.Value = drShop.Field<Int32>("ID");
-                cmbShops.Items.Add(item);
+                cmbShops.Items.Add(shopModel);
             }
+
+
             cmbShops.SelectedIndex = 0;
 
-            BCL.User ObjUsers = new BCL.User();
-            DataTable dtUsers = ObjUsers.GetAllUsers();
+            var ObjUsers = new User();
+            var dtUsers = ObjUsers.GetAllUsers();
             foreach (DataRow drUser in dtUsers.Rows)
             {
-                ComboboxItem item = new ComboboxItem();
-                item.Text = drUser.Field<string>("FullName");
-                item.Value = drUser.Field<string>("Username");
+                var item = new ComboboxItem
+                {
+                    Text = drUser.Field<string>("FullName"), Value = drUser.Field<string>("Username")
+                };
                 CmbUsers.Items.Add(item);
             }
+
             CmbUsers.SelectedIndex = 0;
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            var result = Auth.Instance().SetUser(cmbShops.SelectedIndex+1, CmbUsers.Text, TxtPassword.Text);
+            var result = cmbShops.Items[cmbShops.SelectedIndex] is ShopModel selectedShop && Auth.Instance().SetUser(selectedShop.ID, CmbUsers.Text, TxtPassword.Text);
             if (result)
             {
                 // valid user
@@ -74,6 +63,17 @@ namespace Wines.WinForm.Forms
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        public class ComboboxItem : object
+        {
+            public string Text { get; set; }
+            public object Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
         }
     }
 }

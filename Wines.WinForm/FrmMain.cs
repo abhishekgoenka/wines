@@ -38,5 +38,12 @@ namespace Wines.WinForm
             //show user report
             rpt.ShowAllUsers(user.GetAllUsers());
         }
+
+        private void MenuBrand_Click(object sender, EventArgs e)
+        {
+            var brand = new FrmBrand();
+            brand.ShowDialog(this);
+
+        }
     }
 }

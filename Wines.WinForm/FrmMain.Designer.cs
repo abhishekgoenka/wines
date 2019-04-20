@@ -34,8 +34,9 @@
             this.masterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MenuRptUsers = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuBrand = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +54,8 @@
             // masterToolStripMenuItem
             // 
             this.masterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuUser});
+            this.MenuUser,
+            this.MenuBrand});
             this.masterToolStripMenuItem.Name = "masterToolStripMenuItem";
             this.masterToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.masterToolStripMenuItem.Text = "Master";
@@ -73,17 +75,24 @@
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem.Text = "Reports";
             // 
+            // MenuRptUsers
+            // 
+            this.MenuRptUsers.Name = "MenuRptUsers";
+            this.MenuRptUsers.Size = new System.Drawing.Size(102, 22);
+            this.MenuRptUsers.Text = "Users";
+            this.MenuRptUsers.Click += new System.EventHandler(this.MenuRptUsers_Click);
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // MenuRptUsers
+            // MenuBrand
             // 
-            this.MenuRptUsers.Name = "MenuRptUsers";
-            this.MenuRptUsers.Size = new System.Drawing.Size(180, 22);
-            this.MenuRptUsers.Text = "Users";
-            this.MenuRptUsers.Click += new System.EventHandler(this.MenuRptUsers_Click);
+            this.MenuBrand.Name = "MenuBrand";
+            this.MenuBrand.Size = new System.Drawing.Size(180, 22);
+            this.MenuBrand.Text = "Brand";
+            this.MenuBrand.Click += new System.EventHandler(this.MenuBrand_Click);
             // 
             // FrmMain
             // 
@@ -116,6 +125,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem MenuUser;
         private System.Windows.Forms.ToolStripMenuItem MenuRptUsers;
+        private System.Windows.Forms.ToolStripMenuItem MenuBrand;
     }
 }
 

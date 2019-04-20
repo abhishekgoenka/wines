@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using Wines.DataLayer.DataAccess;
 
 namespace Wines.WinForm.BCL
@@ -37,7 +38,7 @@ namespace Wines.WinForm.BCL
         /// <param name="username">User name</param>
         /// <param name="password">password</param>
         /// <returns>True if login is successful</returns>
-        public bool SetUser(int shopID, string username, string password)
+        public bool SetUser(Int64 shopID, string username, string password)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText = "Select Id, FullName from Users where FullName = @username and Userpass = @password and Shop_ID=@shopID";
