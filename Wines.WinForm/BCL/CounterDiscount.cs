@@ -7,7 +7,7 @@ using Wines.WinForm.Models;
 
 namespace Wines.WinForm.BCL
 {
-    internal class Branch
+    internal class CounterDiscount
     {
         /// <summary>
         ///     Add new Branch
@@ -146,12 +146,12 @@ namespace Wines.WinForm.BCL
         ///     Returns all the Branchs in system
         /// </summary>
         /// <returns></returns>
-        public List<BranchModel> GetAllBranchs()
+        public List<CounterDiscountModel> GetAllBranchs()
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
                 "SELECT ID, Shop_ID, Branch_Name, Address, Active, MobileNo, Advance, Reserve1 FROM Branch;";
-            return Helper.ConvertDataTable<BranchModel>(DataAccess.ExecuteSelectCommand(command));
+            return Helper.ConvertDataTable<CounterDiscountModel>(DataAccess.ExecuteSelectCommand(command));
         }
 
         /// <summary>

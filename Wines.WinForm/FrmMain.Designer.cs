@@ -34,10 +34,12 @@
             this.masterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuBrand = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuBranch = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuRptUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MenuBranch = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuBranchSale = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuCounterDiscount = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +60,9 @@
             this.masterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuUser,
             this.MenuBrand,
-            this.MenuBranch});
+            this.MenuBranch,
+            this.MenuBranchSale,
+            this.MenuCounterDiscount});
             this.masterToolStripMenuItem.Name = "masterToolStripMenuItem";
             this.masterToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
             this.masterToolStripMenuItem.Text = "Master";
@@ -76,6 +80,13 @@
             this.MenuBrand.Size = new System.Drawing.Size(216, 26);
             this.MenuBrand.Text = "Brand";
             this.MenuBrand.Click += new System.EventHandler(this.MenuBrand_Click);
+            // 
+            // MenuBranch
+            // 
+            this.MenuBranch.Name = "MenuBranch";
+            this.MenuBranch.Size = new System.Drawing.Size(216, 26);
+            this.MenuBranch.Text = "Branches";
+            this.MenuBranch.Click += new System.EventHandler(this.MenuBranch_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -98,12 +109,19 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // MenuBranch
+            // MenuBranchSale
             // 
-            this.MenuBranch.Name = "MenuBranch";
-            this.MenuBranch.Size = new System.Drawing.Size(216, 26);
-            this.MenuBranch.Text = "Branch";
-            this.MenuBranch.Click += new System.EventHandler(this.MenuBranch_Click);
+            this.MenuBranchSale.Name = "MenuBranchSale";
+            this.MenuBranchSale.Size = new System.Drawing.Size(216, 26);
+            this.MenuBranchSale.Text = "Branch Sale";
+            this.MenuBranchSale.Click += new System.EventHandler(this.MenuBranchSale_Click);
+            // 
+            // MenuCounterDiscount
+            // 
+            this.MenuCounterDiscount.Name = "MenuCounterDiscount";
+            this.MenuCounterDiscount.Size = new System.Drawing.Size(216, 26);
+            this.MenuCounterDiscount.Text = "Counter Discount";
+            this.MenuCounterDiscount.Click += new System.EventHandler(this.MenuCounterDiscount_Click);
             // 
             // FrmMain
             // 
@@ -138,6 +156,8 @@
         private System.Windows.Forms.ToolStripMenuItem MenuRptUsers;
         private System.Windows.Forms.ToolStripMenuItem MenuBrand;
         private System.Windows.Forms.ToolStripMenuItem MenuBranch;
+        private System.Windows.Forms.ToolStripMenuItem MenuBranchSale;
+        private System.Windows.Forms.ToolStripMenuItem MenuCounterDiscount;
     }
 }
 

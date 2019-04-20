@@ -51,5 +51,17 @@ namespace Wines.WinForm
             FrmBranch branch = new FrmBranch();
             branch.ShowDialog(this);
         }
+
+        private void MenuBranchSale_Click(object sender, EventArgs e)
+        {
+            FrmBranchSale branchSale = new FrmBranchSale();
+            branchSale.ShowDialog(this);
+        }
+
+        private void MenuCounterDiscount_Click(object sender, EventArgs e)
+        {
+            FrmCounterDiscount CntrDis = new FrmCounterDiscount();
+            CntrDis.ShowDialog(this);
+        }
     }
 }

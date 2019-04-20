@@ -98,10 +98,24 @@
   <ItemGroup>
     <Compile Include="BCL\Auth.cs" />
     <Compile Include="BCL\Branch.cs" />
+    <Compile Include="BCL\BranchSale.cs" />
     <Compile Include="BCL\Brand.cs" />
+    <Compile Include="BCL\CounterDiscount.cs" />
     <Compile Include="BCL\Shop.cs" />
     <Compile Include="BCL\User.cs" />
     <Compile Include="Common\Helper.cs" />
+    <Compile Include="Forms\FrmCounterDiscount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmCounterDiscount.Designer.cs">
+      <DependentUpon>FrmCounterDiscount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmBranchSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmBranchSale.Designer.cs">
+      <DependentUpon>FrmBranchSale.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmBranch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,13 +141,21 @@
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\BranchModel.cs" />
+    <Compile Include="Models\BranchSaleModel.cs" />
     <Compile Include="Models\BrandModel.cs" />
+    <Compile Include="Models\CounterDiscountModel.cs" />
     <Compile Include="Models\ShopModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\Report.cs" />
     <Compile Include="Reports\ReportHelper.cs" />
     <Compile Include="Reports\ReportType.cs" />
+    <EmbeddedResource Include="Forms\FrmCounterDiscount.resx">
+      <DependentUpon>FrmCounterDiscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmBranchSale.resx">
+      <DependentUpon>FrmBranchSale.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmBranch.resx">
       <DependentUpon>FrmBranch.cs</DependentUpon>
     </EmbeddedResource>
