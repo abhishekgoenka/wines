@@ -7,3 +7,5 @@ This application is used for liqure management
 
 # References
 - http://blog.tigrangasparian.com/2012/02/09/getting-started-with-sqlite-in-c-part-one/
+
+# Set database path in attached registry file and execute this registry file.
