@@ -217,6 +217,7 @@
             this.grid.Name = "grid";
             this.grid.Size = new System.Drawing.Size(1110, 233);
             this.grid.TabIndex = 18;
+            this.grid.DoubleClick += new System.EventHandler(this.Grid_DoubleClick);
             // 
             // BtnAdd
             // 
@@ -236,6 +237,7 @@
             this.BtnEdit.TabIndex = 1;
             this.BtnEdit.Text = "Edit";
             this.BtnEdit.UseVisualStyleBackColor = true;
+            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // BtnDelete
             // 
@@ -245,9 +247,11 @@
             this.BtnDelete.TabIndex = 2;
             this.BtnDelete.Text = "Delete";
             this.BtnDelete.UseVisualStyleBackColor = true;
+            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // BtnSave
             // 
+            this.BtnSave.Enabled = false;
             this.BtnSave.Location = new System.Drawing.Point(390, 328);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(75, 23);
@@ -258,6 +262,7 @@
             // 
             // BtnCancel
             // 
+            this.BtnCancel.Enabled = false;
             this.BtnCancel.Location = new System.Drawing.Point(471, 328);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(75, 23);
