@@ -6,10 +6,10 @@ using Wines.WinForm.Models;
 
 namespace Wines.WinForm.Forms
 {
-    public partial class FrmBranchSale : Form
+    public partial class FrmBranchSaleDay : Form
     {
         private Int64 m_BranchID = 0;
-        public FrmBranchSale()
+        public FrmBranchSaleDay()
         {
             InitializeComponent();
         }
@@ -18,34 +18,30 @@ namespace Wines.WinForm.Forms
         {
         }
 
-        private void FrmBranchSale_Load(object sender, EventArgs e)
+        private void FrmBranchSaleDay_Load(object sender, EventArgs e)
         {
             Shop Objshop = new Shop();
-            foreach (ShopModel shopModel in Objshop.GetAllShops())
+            foreach (var shopModel in Objshop.GetAllShops())
             {
                 CboShop.Items.Add(shopModel);
             }
             CboShop.SelectedIndex = 0;
 
+            GBControls.Enabled = false;
+            grid.EditMode = DataGridViewEditMode.EditProgrammatically;
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            FillGrid();
 
-
-            BranchModel branchModelall = new BranchModel();
-            branchModelall.Branch_Name = "ALL";
-            CboBranch.Items.Add(branchModelall);
-
-            Branch ObjBranch = new Branch();
-            foreach (BranchModel branchModel in ObjBranch.GetAllBranchs())
-            {
-                CboBranch.Items.Add(branchModel);
-            }
-
-            gridSummary.EditMode = DataGridViewEditMode.EditProgrammatically;
-            gridSummary.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
+            grid.Columns["Branch_Name"].Width = 250;
+            grid.Columns["Active"].Width = 100;
+            grid.Columns["Address"].Width = 200;
+            grid.Columns["MobileNo"].Width = 150;
+            grid.Columns["Advance"].Width = 120;
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
+            GBControls.Enabled = true;
 
             BtnAdd.Enabled = false;
             BtnEdit.Enabled = false;
@@ -59,12 +55,36 @@ namespace Wines.WinForm.Forms
         {
             if (CboShop.Items[CboShop.SelectedIndex] is ShopModel selectedShop)
             {
+                var Branch = new Branch();
+                var result = 0;
+
+                if (m_BranchID > 0)
+                {
+                    // we are in edit mode
+//                    public int Update(long lngID, long lngShopID, string strBranchName, string strAddress, bool bActive,
+  //                                 string strMobileNo, long lngAdvance, string strReserve1)
+
+                    result = Branch.Update(m_BranchID, selectedShop.ID, TxtBranchName.Text, TxtAddress.Text, cbkActive.Checked, 
+                        TxtMobile.Text, NBAdvance.Value, TxtReserve.Text);
+                }
+                else
+                {
+                    result = Branch.Add(selectedShop.ID, TxtBranchName.Text, TxtAddress.Text, cbkActive.Checked,
+                        TxtMobile.Text, NBAdvance.Value, TxtReserve.Text);
+
+                }
+
+                if (result > 0)
+                {
+                    MessageBox.Show(@"Record Saved");
+                }
 
                 BtnAdd.Enabled = true;
                 BtnEdit.Enabled = true;
                 BtnDelete.Enabled = true;
                 BtnSave.Enabled = false;
                 BtnCancel.Enabled = false;
+                GBControls.Enabled = false;
                 FillGrid();
             }
         }
@@ -76,23 +96,18 @@ namespace Wines.WinForm.Forms
             BtnDelete.Enabled = true;
             BtnSave.Enabled = false;
             BtnCancel.Enabled = false;
+            GBControls.Enabled = false;
             FillGrid();
         }
 
         private void FillGrid()
         {
-            BCL.BranchSale Objbranchsale = new BCL.BranchSale();
-            gridSummary.DataSource = Objbranchsale.GetAllBranchSales(m_BranchID);
-
-            if (gridSummary.Columns["ID"] != null)
-                gridSummary.Columns["ID"].Visible = false;
-
-            if (gridSummary.Columns["Shop_ID"] != null)
-                gridSummary.Columns["Shop_ID"].Visible = false;
-
-            if (gridSummary.Columns["User_ID"] != null)
-                gridSummary.Columns["User_ID"].Visible = false;
-
+            BCL.Branch branch = new BCL.Branch();
+            grid.DataSource = branch.GetAllBranchs();
+            if (grid.Columns["ID"] != null)
+            {
+                grid.Columns["ID"].Visible = false;
+            }
         }
 
         private void Grid_SelectionChanged(object sender, EventArgs e)
@@ -103,10 +118,10 @@ namespace Wines.WinForm.Forms
 
         private void Grid_DoubleClick(object sender, EventArgs e)
         {
-            if (gridSummary.SelectedRows.Count == 0)
+            if (grid.SelectedRows.Count == 0)
                 return;
 
-            var id = Convert.ToInt64(gridSummary.SelectedRows[0].Cells["ID"].Value);
+            var id = Convert.ToInt64(grid.SelectedRows[0].Cells["ID"].Value);
             Branch Branch = new Branch();
             BranchModel BranchModel = Branch.GetAllBranchs().FirstOrDefault(b => b.ID == id);
             if (BranchModel != null)
@@ -114,6 +129,12 @@ namespace Wines.WinForm.Forms
                 //todo: Need to fix selected shop
 
                 m_BranchID = BranchModel.ID;
+                TxtBranchName.Text = BranchModel.Branch_Name;
+                cbkActive.Checked = BranchModel.Active;
+                TxtMobile.Text = BranchModel.MobileNo;
+                TxtAddress.Text= BranchModel.Address;
+                NBAdvance.Value = BranchModel.Advance;
+                TxtReserve.Text = BranchModel.Reserve1;
             }
 
         }
@@ -131,6 +152,7 @@ namespace Wines.WinForm.Forms
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
+            GBControls.Enabled = true;
 
             BtnAdd.Enabled = false;
             BtnEdit.Enabled = false;
@@ -142,15 +164,6 @@ namespace Wines.WinForm.Forms
         private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }
-
-        private void CboBranch_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CboBranch.Enabled = false;
-
-            BCL.Branch Objbranch = new BCL.Branch();
-            m_BranchID = Objbranch.GetBranchID(CboBranch.Text);
-            FillGrid();
         }
     }
 }

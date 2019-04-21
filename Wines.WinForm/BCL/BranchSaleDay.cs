@@ -7,7 +7,7 @@ using Wines.WinForm.Models;
 
 namespace Wines.WinForm.BCL
 {
-    internal class BranchSale
+    internal class BranchSaleDay
     {
         /// <summary>
         ///     Add new Branch

@@ -154,6 +154,20 @@ namespace Wines.WinForm.BCL
             return Helper.ConvertDataTable<BranchModel>(DataAccess.ExecuteSelectCommand(command));
         }
 
+        public long GetBranchID(string strBranchName)
+        {
+            var command = DataAccess.CreateCommand(CommandType.Text);
+            command.CommandText =
+                "SELECT ID FROM Branch WHERE BRANCH_NAME='" + strBranchName + "';";
+
+            DataTable dt = DataAccess.ExecuteSelectCommand(command);
+            long BranchID = 0;
+            if (dt != null)
+                if (dt.Rows.Count != 0 && dt.Rows[0][0] != System.DBNull.Value)
+                    BranchID = dt.Rows[0].Field<long>(0);
+            return BranchID;
+        }
+
         /// <summary>
         /// Delete Branch
         /// </summary>

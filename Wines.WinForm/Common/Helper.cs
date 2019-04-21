@@ -15,10 +15,13 @@ namespace Wines.WinForm.Common
         public static List<T> ConvertDataTable<T>(DataTable dt)
         {
             var data = new List<T>();
-            foreach (DataRow row in dt.Rows)
+            if (dt != null)
             {
-                var item = GetItem<T>(row);
-                data.Add(item);
+                foreach (DataRow row in dt.Rows)
+                {
+                    var item = GetItem<T>(row);
+                    data.Add(item);
+                }
             }
 
             return data;

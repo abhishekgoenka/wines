@@ -1,6 +1,6 @@
 ﻿namespace Wines.WinForm.Models
 {
-    internal class BranchSaleModel
+    internal class BranchSaleDayModel
     {
         public long ID { get; set; }
         public long Shop_ID { get; set; }

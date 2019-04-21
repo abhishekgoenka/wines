@@ -10,5 +10,10 @@
         public string MobileNo { get; set; }
         public long Advance { get; set; }
         public string Reserve1 { get; set; }
+
+        public override string ToString()
+        {
+            return Branch_Name;
+        }
     }
 }
