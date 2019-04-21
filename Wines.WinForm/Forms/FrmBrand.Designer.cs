@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBrand));
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -38,7 +37,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.CboShop = new System.Windows.Forms.ComboBox();
             this.TxtLiquor = new System.Windows.Forms.TextBox();
             this.NBBox = new System.Windows.Forms.NumericUpDown();
             this.NBWeight = new System.Windows.Forms.NumericUpDown();
@@ -63,19 +61,10 @@
             this.GBControls.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 14);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Shop";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 58);
+            this.label2.Location = new System.Drawing.Point(27, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 14);
             this.label2.TabIndex = 1;
@@ -85,7 +74,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 85);
+            this.label3.Location = new System.Drawing.Point(27, 49);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 14);
             this.label3.TabIndex = 2;
@@ -94,7 +83,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 112);
+            this.label4.Location = new System.Drawing.Point(27, 76);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(30, 14);
             this.label4.TabIndex = 3;
@@ -103,7 +92,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(33, 139);
+            this.label5.Location = new System.Drawing.Point(27, 103);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 14);
             this.label5.TabIndex = 4;
@@ -112,7 +101,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(33, 166);
+            this.label6.Location = new System.Drawing.Point(27, 130);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(98, 14);
             this.label6.TabIndex = 5;
@@ -121,7 +110,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(33, 193);
+            this.label7.Location = new System.Drawing.Point(27, 157);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(67, 14);
             this.label7.TabIndex = 6;
@@ -130,7 +119,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(33, 220);
+            this.label8.Location = new System.Drawing.Point(27, 184);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(129, 14);
             this.label8.TabIndex = 7;
@@ -139,66 +128,57 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(33, 247);
+            this.label9.Location = new System.Drawing.Point(27, 211);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(66, 14);
             this.label9.TabIndex = 8;
             this.label9.Text = "Reserve1";
             // 
-            // CboShop
-            // 
-            this.CboShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CboShop.FormattingEnabled = true;
-            this.CboShop.Location = new System.Drawing.Point(168, 31);
-            this.CboShop.Name = "CboShop";
-            this.CboShop.Size = new System.Drawing.Size(321, 22);
-            this.CboShop.TabIndex = 0;
-            // 
             // TxtLiquor
             // 
-            this.TxtLiquor.Location = new System.Drawing.Point(168, 85);
+            this.TxtLiquor.Location = new System.Drawing.Point(162, 49);
             this.TxtLiquor.Name = "TxtLiquor";
             this.TxtLiquor.Size = new System.Drawing.Size(321, 22);
             this.TxtLiquor.TabIndex = 2;
             // 
             // NBBox
             // 
-            this.NBBox.Location = new System.Drawing.Point(168, 112);
+            this.NBBox.Location = new System.Drawing.Point(162, 76);
             this.NBBox.Name = "NBBox";
             this.NBBox.Size = new System.Drawing.Size(120, 22);
             this.NBBox.TabIndex = 3;
             // 
             // NBWeight
             // 
-            this.NBWeight.Location = new System.Drawing.Point(168, 139);
+            this.NBWeight.Location = new System.Drawing.Point(162, 103);
             this.NBWeight.Name = "NBWeight";
             this.NBWeight.Size = new System.Drawing.Size(120, 22);
             this.NBWeight.TabIndex = 4;
             // 
             // NBPurchaseRate
             // 
-            this.NBPurchaseRate.Location = new System.Drawing.Point(168, 166);
+            this.NBPurchaseRate.Location = new System.Drawing.Point(162, 130);
             this.NBPurchaseRate.Name = "NBPurchaseRate";
             this.NBPurchaseRate.Size = new System.Drawing.Size(120, 22);
             this.NBPurchaseRate.TabIndex = 5;
             // 
             // NBSaleRate
             // 
-            this.NBSaleRate.Location = new System.Drawing.Point(168, 193);
+            this.NBSaleRate.Location = new System.Drawing.Point(162, 157);
             this.NBSaleRate.Name = "NBSaleRate";
             this.NBSaleRate.Size = new System.Drawing.Size(120, 22);
             this.NBSaleRate.TabIndex = 6;
             // 
             // NBBranchCommission
             // 
-            this.NBBranchCommission.Location = new System.Drawing.Point(168, 220);
+            this.NBBranchCommission.Location = new System.Drawing.Point(162, 184);
             this.NBBranchCommission.Name = "NBBranchCommission";
             this.NBBranchCommission.Size = new System.Drawing.Size(120, 22);
             this.NBBranchCommission.TabIndex = 7;
             // 
             // TxtReserve
             // 
-            this.TxtReserve.Location = new System.Drawing.Point(168, 247);
+            this.TxtReserve.Location = new System.Drawing.Point(162, 211);
             this.TxtReserve.Name = "TxtReserve";
             this.TxtReserve.Size = new System.Drawing.Size(321, 22);
             this.TxtReserve.TabIndex = 8;
@@ -206,15 +186,15 @@
             // grid
             // 
             this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid.Location = new System.Drawing.Point(12, 369);
+            this.grid.Location = new System.Drawing.Point(12, 326);
             this.grid.Name = "grid";
-            this.grid.Size = new System.Drawing.Size(1110, 233);
+            this.grid.Size = new System.Drawing.Size(1110, 276);
             this.grid.TabIndex = 18;
             this.grid.Click += new System.EventHandler(this.Grid_Click);
             // 
             // BtnAdd
             // 
-            this.BtnAdd.Location = new System.Drawing.Point(147, 328);
+            this.BtnAdd.Location = new System.Drawing.Point(49, 290);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(75, 23);
             this.BtnAdd.TabIndex = 0;
@@ -224,7 +204,7 @@
             // 
             // BtnEdit
             // 
-            this.BtnEdit.Location = new System.Drawing.Point(228, 328);
+            this.BtnEdit.Location = new System.Drawing.Point(130, 290);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(75, 23);
             this.BtnEdit.TabIndex = 1;
@@ -234,7 +214,7 @@
             // 
             // BtnDelete
             // 
-            this.BtnDelete.Location = new System.Drawing.Point(309, 328);
+            this.BtnDelete.Location = new System.Drawing.Point(211, 290);
             this.BtnDelete.Name = "BtnDelete";
             this.BtnDelete.Size = new System.Drawing.Size(75, 23);
             this.BtnDelete.TabIndex = 2;
@@ -245,7 +225,7 @@
             // BtnSave
             // 
             this.BtnSave.Enabled = false;
-            this.BtnSave.Location = new System.Drawing.Point(390, 328);
+            this.BtnSave.Location = new System.Drawing.Point(292, 290);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(75, 23);
             this.BtnSave.TabIndex = 3;
@@ -256,7 +236,7 @@
             // BtnCancel
             // 
             this.BtnCancel.Enabled = false;
-            this.BtnCancel.Location = new System.Drawing.Point(471, 328);
+            this.BtnCancel.Location = new System.Drawing.Point(373, 290);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(75, 23);
             this.BtnCancel.TabIndex = 4;
@@ -267,8 +247,6 @@
             // GBControls
             // 
             this.GBControls.Controls.Add(this.CBOCategory);
-            this.GBControls.Controls.Add(this.CboShop);
-            this.GBControls.Controls.Add(this.label1);
             this.GBControls.Controls.Add(this.label2);
             this.GBControls.Controls.Add(this.label3);
             this.GBControls.Controls.Add(this.label4);
@@ -284,9 +262,9 @@
             this.GBControls.Controls.Add(this.NBWeight);
             this.GBControls.Controls.Add(this.TxtLiquor);
             this.GBControls.Controls.Add(this.NBBox);
-            this.GBControls.Location = new System.Drawing.Point(147, 12);
+            this.GBControls.Location = new System.Drawing.Point(12, 24);
             this.GBControls.Name = "GBControls";
-            this.GBControls.Size = new System.Drawing.Size(545, 302);
+            this.GBControls.Size = new System.Drawing.Size(545, 255);
             this.GBControls.TabIndex = 24;
             this.GBControls.TabStop = false;
             // 
@@ -294,7 +272,7 @@
             // 
             this.CBOCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBOCategory.FormattingEnabled = true;
-            this.CBOCategory.Location = new System.Drawing.Point(168, 57);
+            this.CBOCategory.Location = new System.Drawing.Point(162, 21);
             this.CBOCategory.Name = "CBOCategory";
             this.CBOCategory.Size = new System.Drawing.Size(321, 22);
             this.CBOCategory.TabIndex = 9;
@@ -334,8 +312,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -344,7 +320,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox CboShop;
         private System.Windows.Forms.TextBox TxtLiquor;
         private System.Windows.Forms.NumericUpDown NBBox;
         private System.Windows.Forms.NumericUpDown NBWeight;

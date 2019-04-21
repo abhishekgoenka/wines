@@ -22,11 +22,6 @@ namespace Wines.WinForm.Forms
 
         private void FrmBrand_Load(object sender, EventArgs e)
         {
-            var shop = new Shop();
-            CboShop.DataSource = shop.GetAllShops();
-            CboShop.DisplayMember = "Shop_Name";
-            CboShop.ValueMember = "ID";
-
             GBControls.Enabled = false;
             grid.EditMode = DataGridViewEditMode.EditProgrammatically;
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -58,13 +53,13 @@ namespace Wines.WinForm.Forms
             if (brandid > 0)
             {
                 // we are in edit mode
-                result = brand.Update(brandid, CboShop.SelectedValue.ToInt64(), CBOCategory.SelectedValue.ToString(),
+                result = brand.Update(brandid, Auth.Instance().ShopId, CBOCategory.SelectedValue.ToString(),
                     TxtLiquor.Text, NBBox.Value, NBWeight.Value,
                     NBPurchaseRate.Value, NBSaleRate.Value, NBBranchCommission.Value, TxtReserve.Text);
             }
             else
             {
-                result = brand.Add(CboShop.SelectedValue.ToInt64(), CBOCategory.SelectedValue.ToString(),
+                result = brand.Add(Auth.Instance().ShopId, CBOCategory.SelectedValue.ToString(),
                     TxtLiquor.Text,
                     NBBox.Value, NBWeight.Value,
                     NBPurchaseRate.Value, NBSaleRate.Value, NBBranchCommission.Value, TxtReserve.Text);
@@ -103,7 +98,7 @@ namespace Wines.WinForm.Forms
                 grid.Columns["ID"].Visible = false;
             }
 
-            grid.Columns["Shop_ID"].HeaderText = "Shop";
+            grid.Columns["Shop_ID"].Visible = false;
             grid.Columns["Liq_Name"].HeaderText = "Liquor";
             grid.Columns["Purchase_Rate"].HeaderText = "Purchase Rate";
             grid.Columns["Sale_Rate"].HeaderText = "Sale Rate";
@@ -139,7 +134,6 @@ namespace Wines.WinForm.Forms
                 var brandModel = brand.GetAllBrands().FirstOrDefault(b => b.ID == id);
                 if (brandModel != null)
                 {
-                    CboShop.SelectedValue = brandModel.Shop_ID;
                     brandid = brandModel.ID;
                     CBOCategory.SelectedValue = brandModel.Category;
                     TxtLiquor.Text = brandModel.Liq_Name;

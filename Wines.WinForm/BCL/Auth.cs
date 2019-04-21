@@ -20,7 +20,7 @@ namespace Wines.WinForm.BCL
         public string Username { get; private set; }
         public bool IsAuthenticated { get; private set; }
         public string ShopName { get; private set; }
-
+        public Int64 ShopId { get; private set; }
         public static Auth Instance()
         {
             if (instance == null)
@@ -76,6 +76,7 @@ namespace Wines.WinForm.BCL
             Username = username;
             User_ID = 1;
             ShopName = shopname;
+            ShopId = shopID;
             return true;
         }
     }
