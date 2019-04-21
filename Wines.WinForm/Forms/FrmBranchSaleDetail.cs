@@ -6,10 +6,12 @@ using Wines.WinForm.Models;
 
 namespace Wines.WinForm.Forms
 {
-    public partial class FrmBranchSaleDay : Form
+    public partial class FrmBranchSaleDetail : Form
     {
-        private Int64 m_BranchID = 0;
-        public FrmBranchSaleDay()
+        public Int64 m_BranchID = 0;
+        public string m_BranchName;
+        public Int64 m_BranchSaleSummaryID = 0;
+        public FrmBranchSaleDetail()
         {
             InitializeComponent();
         }
@@ -26,6 +28,14 @@ namespace Wines.WinForm.Forms
                 CboShop.Items.Add(shopModel);
             }
             CboShop.SelectedIndex = 0;
+
+            Branch ObjBranch = new Branch();
+            foreach (BranchModel branchModel in ObjBranch.GetAllBranchs())
+            {
+                CboBranch.Items.Add(branchModel);
+            }
+
+            CboBranch.Text = m_BranchName;
 
             GBControls.Enabled = false;
             grid.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -162,6 +172,11 @@ namespace Wines.WinForm.Forms
         }
 
         private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void GBControls_Enter(object sender, EventArgs e)
         {
 
         }
