@@ -39,7 +39,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.CboShop = new System.Windows.Forms.ComboBox();
-            this.TxtCategory = new System.Windows.Forms.TextBox();
             this.TxtLiquor = new System.Windows.Forms.TextBox();
             this.NBBox = new System.Windows.Forms.NumericUpDown();
             this.NBWeight = new System.Windows.Forms.NumericUpDown();
@@ -54,6 +53,7 @@
             this.BtnSave = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.GBControls = new System.Windows.Forms.GroupBox();
+            this.CBOCategory = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.NBBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NBWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NBPurchaseRate)).BeginInit();
@@ -154,13 +154,6 @@
             this.CboShop.Size = new System.Drawing.Size(321, 22);
             this.CboShop.TabIndex = 0;
             // 
-            // TxtCategory
-            // 
-            this.TxtCategory.Location = new System.Drawing.Point(168, 58);
-            this.TxtCategory.Name = "TxtCategory";
-            this.TxtCategory.Size = new System.Drawing.Size(321, 22);
-            this.TxtCategory.TabIndex = 1;
-            // 
             // TxtLiquor
             // 
             this.TxtLiquor.Location = new System.Drawing.Point(168, 85);
@@ -217,7 +210,7 @@
             this.grid.Name = "grid";
             this.grid.Size = new System.Drawing.Size(1110, 233);
             this.grid.TabIndex = 18;
-            this.grid.DoubleClick += new System.EventHandler(this.Grid_DoubleClick);
+            this.grid.Click += new System.EventHandler(this.Grid_Click);
             // 
             // BtnAdd
             // 
@@ -273,6 +266,7 @@
             // 
             // GBControls
             // 
+            this.GBControls.Controls.Add(this.CBOCategory);
             this.GBControls.Controls.Add(this.CboShop);
             this.GBControls.Controls.Add(this.label1);
             this.GBControls.Controls.Add(this.label2);
@@ -287,7 +281,6 @@
             this.GBControls.Controls.Add(this.NBSaleRate);
             this.GBControls.Controls.Add(this.label9);
             this.GBControls.Controls.Add(this.NBPurchaseRate);
-            this.GBControls.Controls.Add(this.TxtCategory);
             this.GBControls.Controls.Add(this.NBWeight);
             this.GBControls.Controls.Add(this.TxtLiquor);
             this.GBControls.Controls.Add(this.NBBox);
@@ -296,6 +289,15 @@
             this.GBControls.Size = new System.Drawing.Size(545, 302);
             this.GBControls.TabIndex = 24;
             this.GBControls.TabStop = false;
+            // 
+            // CBOCategory
+            // 
+            this.CBOCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBOCategory.FormattingEnabled = true;
+            this.CBOCategory.Location = new System.Drawing.Point(168, 57);
+            this.CBOCategory.Name = "CBOCategory";
+            this.CBOCategory.Size = new System.Drawing.Size(321, 22);
+            this.CBOCategory.TabIndex = 9;
             // 
             // FrmBrand
             // 
@@ -343,7 +345,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox CboShop;
-        private System.Windows.Forms.TextBox TxtCategory;
         private System.Windows.Forms.TextBox TxtLiquor;
         private System.Windows.Forms.NumericUpDown NBBox;
         private System.Windows.Forms.NumericUpDown NBWeight;
@@ -358,5 +359,6 @@
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.GroupBox GBControls;
+        private System.Windows.Forms.ComboBox CBOCategory;
     }
 }

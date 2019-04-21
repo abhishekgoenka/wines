@@ -19,6 +19,7 @@ namespace Wines.WinForm.BCL
         public long User_ID{ get; private set; }
         public string Username { get; private set; }
         public bool IsAuthenticated { get; private set; }
+        public string ShopName { get; private set; }
 
         public static Auth Instance()
         {
@@ -36,10 +37,12 @@ namespace Wines.WinForm.BCL
         /// <summary>
         ///     Login
         /// </summary>
+        /// <param name="shopID">shop id</param>
+        /// <param name="shopname">Shop name</param>
         /// <param name="username">User name</param>
         /// <param name="password">password</param>
         /// <returns>True if login is successful</returns>
-        public bool SetUser(Int64 shopID, string username, string password)
+        public bool SetUser(Int64 shopID, string shopname, string username, string password)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText = "Select Id, FullName from Users where FullName = @username and Userpass = @password and Shop_ID=@shopID";
@@ -72,6 +75,7 @@ namespace Wines.WinForm.BCL
             IsAuthenticated = true;
             Username = username;
             User_ID = 1;
+            ShopName = shopname;
             return true;
         }
     }

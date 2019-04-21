@@ -28,6 +28,8 @@ namespace Wines.WinForm
             frmLogin.ShowDialog(this);
 
             menuStrip1.Enabled = Auth.Instance().IsAuthenticated;
+            StatusBarUser.Text = $@"Logged in user : {Auth.Instance().Username}";
+            StatusBarShop.Text = $@"Logged in shop : {Auth.Instance().ShopName}";
         }
 
         private void MenuRptUsers_Click(object sender, EventArgs e)

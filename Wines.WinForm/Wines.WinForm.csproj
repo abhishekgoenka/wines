@@ -104,6 +104,7 @@
     <Compile Include="BCL\Shop.cs" />
     <Compile Include="BCL\User.cs" />
     <Compile Include="Common\Helper.cs" />
+    <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
     <Compile Include="Forms\FrmCounterDiscount.cs">
       <SubType>Form</SubType>
     </Compile>

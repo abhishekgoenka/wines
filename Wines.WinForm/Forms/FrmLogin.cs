@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using NLog;
 using Wines.WinForm.BCL;
+using Wines.WinForm.ExtensionMethods;
 using Wines.WinForm.Models;
 
 namespace Wines.WinForm.Forms
@@ -16,13 +17,9 @@ namespace Wines.WinForm.Forms
             InitializeComponent();
 
             var shop = new Shop();
-            foreach (var shopModel in shop.GetAllShops())
-            {
-                cmbShops.Items.Add(shopModel);
-            }
-
-
-            cmbShops.SelectedIndex = 0;
+            cmbShops.DataSource = shop.GetAllShops();
+            cmbShops.DisplayMember = "Shop_Name";
+            cmbShops.ValueMember = "ID";
 
             var ObjUsers = new User();
             var dtUsers = ObjUsers.GetAllUsers();
@@ -40,17 +37,22 @@ namespace Wines.WinForm.Forms
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            var result = cmbShops.Items[cmbShops.SelectedIndex] is ShopModel selectedShop && Auth.Instance().SetUser(selectedShop.ID, CmbUsers.Text, TxtPassword.Text);
-            if (result)
+
+            if (cmbShops.SelectedIndex > -1)
             {
-                // valid user
-                Close();
+                var result = Auth.Instance().SetUser(cmbShops.SelectedValue.ToInt64(), cmbShops.SelectedItem.ToString(), CmbUsers.Text, TxtPassword.Text);
+                if (result)
+                {
+                    // valid user
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show(@"Invalid credentials");
+                    _logger.Warn($"Invalid credentials {CmbUsers.Text}, pass {TxtPassword.Text}");
+                }
             }
-            else
-            {
-                MessageBox.Show(@"Invalid credentials");
-                _logger.Warn($"Invalid credentials {CmbUsers.Text}, pass {TxtPassword.Text}");
-            }
+            
         }
 
         private void FrmLogin_Load(object sender, EventArgs e)

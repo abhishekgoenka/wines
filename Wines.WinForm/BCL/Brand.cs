@@ -203,5 +203,28 @@ namespace Wines.WinForm.BCL
 
             return DataAccess.ExecuteNonQuery(command);
         }
+
+        /// <summary>
+        /// Returns all categories of brand
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetAllCategories()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Name");
+            dt.Columns.Add("Key");
+
+            DataRow dr = dt.NewRow();
+            dr["Name"] = "IMFL";
+            dr["Key"] = "IMFL";
+            dt.Rows.Add(dr);
+
+            dr = dt.NewRow();
+            dr["Name"] = "CL (Countery Liquore)";
+            dr["Key"] = "CL";
+            dt.Rows.Add(dr);
+
+            return dt;
+        }
     }
 }
