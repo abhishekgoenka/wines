@@ -159,8 +159,8 @@ namespace Wines.WinForm.Forms
             var result = MessageBox.Show(@"Delete?", @"Delete", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                BCL.Branch ObjBranch = new Branch();
-                ObjBranch.DeleteBranch(m_ExpensesID);
+                BCL.Expenses ObjExpenses = new Expenses();
+                ObjExpenses.DeleteExpenses(m_ExpensesID);
                 FillGrid();
             }
         }

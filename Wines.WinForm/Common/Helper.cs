@@ -41,7 +41,8 @@ namespace Wines.WinForm.Common
                 {
                     if (pro.Name == column.ColumnName)
                     {
-                        pro.SetValue(obj, dr[column.ColumnName], null);
+                        if (dr[column.ColumnName] != System.DBNull.Value)
+                            pro.SetValue(obj, dr[column.ColumnName], null);
                     }
                 }
             }

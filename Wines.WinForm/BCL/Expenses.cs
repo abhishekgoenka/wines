@@ -207,7 +207,7 @@ namespace Wines.WinForm.BCL
         /// </summary>
         /// <param name="id">Branch ID</param>
         /// <returns></returns>
-        public int DeleteBranch(Int64 lngID)
+        public int DeleteExpenses(Int64 lngID)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
