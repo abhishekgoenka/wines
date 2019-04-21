@@ -104,7 +104,9 @@
     <Compile Include="BCL\Brand.cs" />
     <Compile Include="BCL\CounterDiscount.cs" />
     <Compile Include="BCL\Expenses.cs" />
+    <Compile Include="BCL\Purchase.cs" />
     <Compile Include="BCL\Shop.cs" />
+    <Compile Include="BCL\Supplier.cs" />
     <Compile Include="BCL\User.cs" />
     <Compile Include="Common\Helper.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
@@ -156,6 +158,12 @@
     <Compile Include="Forms\FrmLogin.Designer.cs">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmPurchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmPurchase.Designer.cs">
+      <DependentUpon>FrmPurchase.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmPurchase.resx">
+      <DependentUpon>FrmPurchase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>

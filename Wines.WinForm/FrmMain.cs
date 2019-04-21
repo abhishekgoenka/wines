@@ -89,5 +89,11 @@ namespace Wines.WinForm
             FrmCounterSale frmCntrSale = new FrmCounterSale();
             frmCntrSale.ShowDialog(this);
         }
+
+        private void MenuPurchase_Click(object sender, EventArgs e)
+        {
+            FrmPurchase purchase = new FrmPurchase();
+            purchase.ShowDialog(this);
+        }
     }
 }
