@@ -7,26 +7,14 @@ using Wines.WinForm.Models;
 
 namespace Wines.WinForm.BCL
 {
-    internal class CounterDiscount
+    internal class Expenses
     {
-        /// <summary>
-        ///     Add new Branch
-        /// </summary>
-        /// <param name="ID"></param>
-        /// <param name="Shop_ID"></param>
-        /// <param name="User_ID"></param>
-        /// <param name="Discount_Date"></param>
-        /// <param name="Modify_Date"></param>
-        /// <param name="Discount_Amt"></param>
-        /// <param name="Description"></param>
-        /// <param name="reserve1"></param>
-        /// <returns></returns>
-        public int Add(long lngShopID, long lngUserID, System.DateTime dtDiscountDate, decimal DiscountAmt, string strDescription, string strReserve1)
+        public int Add(long lngShopID, long lngUserID, System.DateTime dtExpDate, string strExp_Type, decimal lngExpAmt, string strDescription, string strReserve1)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "INSERT INTO Counter_Discount (Shop_ID, User_ID, Discount_Date, Modify_Date, Discount_Amt, Description, Reserve1) " +
-                "VALUES (@Shop_ID, @User_ID, @Discount_Date, @Modify_Date, @Discount_Amt, @Description, @Reserve1)";
+                "INSERT INTO EXPENSES(Shop_ID, User_ID, EXP_Date, Modify_Date, EXP_TYPE, EXP_AMT, Description, Reserve1) " +
+                "VALUES (@Shop_ID, @User_ID, @EXP_Date, @Modify_Date, @EXP_TYPE, @EXP_AMT, @Description, @Reserve1)";
 
             var parameter = command.CreateParameter();
             parameter.ParameterName = "@Shop_ID";
@@ -41,8 +29,8 @@ namespace Wines.WinForm.BCL
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Discount_Date";
-            parameter.Value = dtDiscountDate;
+            parameter.ParameterName = "@Exp_Date";
+            parameter.Value = dtExpDate;
             parameter.DbType = DbType.DateTime;
             command.Parameters.Add(parameter);
 
@@ -53,8 +41,14 @@ namespace Wines.WinForm.BCL
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Discount_Amt";
-            parameter.Value = DiscountAmt;
+            parameter.ParameterName = "@Exp_Type";
+            parameter.Value = strExp_Type;
+            parameter.DbType = DbType.String;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Exp_AMT";
+            parameter.Value = lngExpAmt;
             parameter.DbType = DbType.Int64;
             command.Parameters.Add(parameter);
 
@@ -74,26 +68,13 @@ namespace Wines.WinForm.BCL
             return retVal;
         }
 
-        /// <summary>
-        /// Update Branch
-        /// </summary>
-        /// <param name="ID"></param>
-        /// <param name="Shop_ID"></param>
-        /// <param name="Branch_Name"></param>
-        /// <param name="Box"></param>
-        /// <param name="Address"></param>
-        /// <param name="Active"></param>
-        /// <param name="MobileNo"></param>
-        /// <param name="Advance"></param>
-        /// <param name="reserve1"></param>
-        /// <returns></returns>
-        public int Update(long lngID, long lngShopID, long lngUserID, System.DateTime dtDiscountDate, 
-                                        decimal DiscountAmt, string strDescription, string strReserve1)
+        public int Update(long lngID, long lngShopID, long lngUserID, System.DateTime dtExpDate, 
+                                    string strExp_Type, decimal lngExpAmt, string strDescription, string strReserve1)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "UPDATE Counter_Discount SET Shop_ID = @Shop_ID, User_ID = @User_ID, Discount_Date = @Discount_Date, Modify_Date = @Modify_Date, " +
-                " Discount_Amt = @Discount_Amt, Description = @Description, Reserve1 = @Reserve1 WHERE ID = @ID";
+                "UPDATE EXPENSES SET Shop_ID = @Shop_ID, User_ID = @User_ID, EXP_Date = @Exp_Date, Modify_Date = @Modify_Date, " +
+                " EXP_TYPE = @Exp_Type, Exp_Amt = @Exp_Amt, Description = @Description, Reserve1 = @Reserve1 WHERE ID = @ID";
 
             var parameter = command.CreateParameter();
             parameter.ParameterName = "@Shop_ID";
@@ -108,8 +89,8 @@ namespace Wines.WinForm.BCL
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Discount_Date";
-            parameter.Value = dtDiscountDate;
+            parameter.ParameterName = "@Exp_Date";
+            parameter.Value = dtExpDate;
             parameter.DbType = DbType.DateTime;
             command.Parameters.Add(parameter);
 
@@ -120,8 +101,14 @@ namespace Wines.WinForm.BCL
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Discount_Amt";
-            parameter.Value = DiscountAmt;
+            parameter.ParameterName = "@Exp_Type";
+            parameter.Value = strExp_Type;
+            parameter.DbType = DbType.String;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Exp_Amt";
+            parameter.Value = lngExpAmt;
             parameter.DbType = DbType.Int64;
             command.Parameters.Add(parameter);
 
@@ -150,68 +137,68 @@ namespace Wines.WinForm.BCL
         ///     Returns all the Discounts in system
         /// </summary>
         /// <returns></returns>
-        public List<CounterDiscountModel> GetAllCounterDiscounts()
+        public List<ExpensesModel> GetAllExpenses()
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "SELECT ID, Shop_ID, User_ID, Discount_Date, Modify_Date, Discount_Amt, Description, Reserve1 FROM Counter_Discount " +
+                "SELECT ID, Shop_ID, User_ID, Exp_Date, Modify_Date, Exp_Type, Exp_Amt, Description, Reserve1 FROM EXPENSES " +
                 " ORDER BY Modify_Date;";
-            return Helper.ConvertDataTable<CounterDiscountModel>(DataAccess.ExecuteSelectCommand(command));
+            return Helper.ConvertDataTable<ExpensesModel>(DataAccess.ExecuteSelectCommand(command));
         }
 
         /// <summary>
         ///     Returns all the Discounts in system
         /// </summary>
         /// <returns></returns>
-        public long  GetDateRangeDiscount(System.DateTime dtStartDiscountDate, System.DateTime dtEndDiscountDate)
+        public long  GetDateRangeExpenses(System.DateTime dtStartExpDate, System.DateTime dtEndExpDate)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                    "SELECT SUM(Discount_Amt) AS Discount_Amt FROM Counter_Discount " +
-                    "where strftime('%Y-%m-%d', Discount_Date) BETWEEN @dtStartDiscountDate AND @dtEndDiscountDate";
+                    "SELECT SUM(Exp_Amt) AS Exp_Amt FROM EXPENSES " +
+                    "where strftime('%Y-%m-%d', Exp_Date) BETWEEN @dtStartExpDate AND @dtEndExpDate";
 
-            string strdate1 = dtStartDiscountDate.ToString("yyyy-MM-dd");
-            string strdate2 = dtEndDiscountDate.ToString("yyyy-MM-dd");
+            string strdate1 = dtStartExpDate.ToString("yyyy-MM-dd");
+            string strdate2 = dtEndExpDate.ToString("yyyy-MM-dd");
 
             var parameter = command.CreateParameter();
-            parameter.ParameterName = "@dtStartDiscountDate";
+            parameter.ParameterName = "@dtStartExpDate";
             parameter.Value = strdate1;
             parameter.DbType = DbType.String;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@dtEndDiscountDate";
+            parameter.ParameterName = "@dtEndExpDate";
             parameter.Value = strdate2;
             parameter.DbType = DbType.String;
             command.Parameters.Add(parameter);
 
             DataTable dt = DataAccess.ExecuteSelectCommand(command);
-            long DiscountAmount = 0;
+            long ExpAmtDuration= 0;
             if (  dt != null)
-                if (dt.Rows[0][0] != System.DBNull.Value)
-                    DiscountAmount = dt.Rows[0].Field<long>(0);
+                if ( dt.Rows[0][0]!= System.DBNull.Value)
+                    ExpAmtDuration = dt.Rows[0].Field<long>(0);
 
-            return DiscountAmount;
+            return ExpAmtDuration;
         }
 
         /// <summary>
         ///     Returns all the Discounts in system
         /// </summary>
         /// <returns></returns>
-        public long GetDiscountAmount()
+        public long GetExpensesAmount()
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "SELECT sum(Discount_Amt) FROM Counter_Discount";
+                "SELECT sum(Exp_Amt) FROM EXPENSES";
 
             DataTable dt = DataAccess.ExecuteSelectCommand(command);
-            long DiscountAmount = 0; 
+            long ExpAmtAll = 0;
 
             if (dt != null)
                 if (dt.Rows[0][0] != System.DBNull.Value)
-                    DiscountAmount = dt.Rows[0].Field<long>(0);
+                    ExpAmtAll = dt.Rows[0].Field<long>(0);
 
-            return DiscountAmount;
+            return ExpAmtAll;
         }
 
 
@@ -224,7 +211,7 @@ namespace Wines.WinForm.BCL
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "DELETE FROM Counter_Discount WHERE ID = @ID ";
+                "DELETE FROM EXPENSES WHERE ID = @ID ";
 
             var parameter = command.CreateParameter();
             parameter.ParameterName = "@ID";

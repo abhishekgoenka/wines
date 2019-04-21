@@ -6,15 +6,15 @@ using Wines.WinForm.Models;
 
 namespace Wines.WinForm.Forms
 {
-    public partial class FrmCounterDiscount : Form
+    public partial class FrmExpenses: Form
     {
-        private Int64 m_CounterDiscount_ID= 0;
-        public FrmCounterDiscount()
+        private Int64 m_ExpensesID= 0;
+        public FrmExpenses()
         {
             InitializeComponent();
         }
 
-        private void FrmCounterDiscount_Load(object sender, EventArgs e)
+        private void FrmExpenses_Load(object sender, EventArgs e)
         {
             Shop Objshop = new Shop();
             foreach (var shopModel in Objshop.GetAllShops())
@@ -26,6 +26,14 @@ namespace Wines.WinForm.Forms
             GBControls.Enabled = false;
             grid.EditMode = DataGridViewEditMode.EditProgrammatically;
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            cmbExpType.Items.Add("PAVA FOOT");
+            cmbExpType.Items.Add("PAVA LESS");
+            cmbExpType.Items.Add("TEA");
+            cmbExpType.Items.Add("FOOD");
+            cmbExpType.Items.Add("STATIONARY");
+            cmbExpType.Items.Add("KIRANA");
+
             FillGrid();
 
             //grid.Columns["Branch_Name"].Width = 250;
@@ -44,29 +52,29 @@ namespace Wines.WinForm.Forms
             BtnDelete.Enabled = false;
             BtnSave.Enabled = true;
             BtnCancel.Enabled = true;
-            m_CounterDiscount_ID = 0;
+            m_ExpensesID= 0;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (CboShop.Items[CboShop.SelectedIndex] is ShopModel selectedShop)
             {
-                var CounterDis = new CounterDiscount();
+                var ObjExpenses= new Expenses();
                 var result = 0;
 
-                if (m_CounterDiscount_ID > 0)
+                if (m_ExpensesID > 0)
                 {
                     // we are in edit mode
 //                    public int Update(long lngID, long lngShopID, string strBranchName, string strAddress, bool bActive,
   //                                 string strMobileNo, long lngAdvance, string strReserve1)
 
-                    result = CounterDis.Update(m_CounterDiscount_ID, selectedShop.ID, 1, dtDiscountDate.Value, 
-                                        NBDiscountAmt.Value, TxtDescription.Text, TxtReserve.Text);
+                    result = ObjExpenses.Update(m_ExpensesID, selectedShop.ID, 1, dtExpDate.Value, 
+                                        cmbExpType.Text, NBExpAmt.Value, TxtDescription.Text, TxtReserve.Text);
                 }
                 else
                 {
-                    result = CounterDis.Add(selectedShop.ID, 1, dtDiscountDate.Value,
-                                        NBDiscountAmt.Value, TxtDescription.Text, TxtReserve.Text);
+                    result = ObjExpenses.Add(selectedShop.ID, 1, dtExpDate.Value,
+                                        cmbExpType.Text,NBExpAmt.Value, TxtDescription.Text, TxtReserve.Text);
 
                 }
 
@@ -98,8 +106,8 @@ namespace Wines.WinForm.Forms
 
         private void FillGrid()
         {
-            BCL.CounterDiscount CounterDis = new BCL.CounterDiscount();
-            grid.DataSource = CounterDis.GetAllCounterDiscounts();
+            BCL.Expenses ObjExpeses= new BCL.Expenses();
+            grid.DataSource = ObjExpeses.GetAllExpenses();
             if (grid.Columns["ID"] != null)
             {
                 grid.Columns["ID"].Visible = false;
@@ -109,11 +117,12 @@ namespace Wines.WinForm.Forms
             var today = DateTime.Now;
             var dtStartDate = new DateTime(today.Year, today.Month, 1);
             var dtEndDate = dtStartDate.AddMonths(1).AddDays(-1);
-            long monthDisAmount = CounterDis.GetDateRangeDiscount( dtStartDate, dtEndDate);
-            long lngFullYearDiscountAmt = CounterDis.GetDiscountAmount();
 
-            NBMonthDiscount.Value = monthDisAmount;
-            NBTotalDiscount.Value = lngFullYearDiscountAmt;
+            long ThisMonthExpenses = ObjExpeses.GetDateRangeExpenses( dtStartDate, dtEndDate);
+            long lngFullYearExpAmt = ObjExpeses.GetExpensesAmount();
+
+            NBMonthExpenses.Value = ThisMonthExpenses;
+            NBTotalExpenses.Value = lngFullYearExpAmt;
 
         }
 
@@ -129,17 +138,18 @@ namespace Wines.WinForm.Forms
                 return;
 
             var id = Convert.ToInt64(grid.SelectedRows[0].Cells["ID"].Value);
-            CounterDiscount CounterDis = new CounterDiscount();
-            CounterDiscountModel CounterDisMod = CounterDis.GetAllCounterDiscounts().FirstOrDefault(b => b.ID == id);
-            if (CounterDisMod != null)
+            Expenses ObjExpenses = new Expenses();
+            ExpensesModel ExpMod = ObjExpenses.GetAllExpenses().FirstOrDefault(b => b.ID == id);
+            if (ExpMod!= null)
             {
                 //todo: Need to fix selected shop
 
-                m_CounterDiscount_ID = CounterDisMod.ID;
-                dtDiscountDate.Value= CounterDisMod.Discount_Date;
-                NBDiscountAmt.Value = CounterDisMod.Discount_Amt;
-                TxtDescription.Text= CounterDisMod.Description;
-                TxtReserve.Text = CounterDisMod.Reserve1;
+                m_ExpensesID = ExpMod.ID;
+                dtExpDate.Value= ExpMod.Exp_Date;
+                cmbExpType.Text = ExpMod.Exp_Type;
+                NBExpAmt.Value = ExpMod.Exp_Amt;
+                TxtDescription.Text= ExpMod.Description;
+                TxtReserve.Text = ExpMod.Reserve1;
             }
 
         }
@@ -150,7 +160,7 @@ namespace Wines.WinForm.Forms
             if (result == DialogResult.Yes)
             {
                 BCL.Branch ObjBranch = new Branch();
-                ObjBranch.DeleteBranch(m_CounterDiscount_ID);
+                ObjBranch.DeleteBranch(m_ExpensesID);
                 FillGrid();
             }
         }

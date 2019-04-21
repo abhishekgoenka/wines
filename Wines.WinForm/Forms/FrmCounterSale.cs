@@ -6,15 +6,19 @@ using Wines.WinForm.Models;
 
 namespace Wines.WinForm.Forms
 {
-    public partial class FrmCounterDiscount : Form
+    public partial class FrmCounterSale : Form
     {
-        private Int64 m_CounterDiscount_ID= 0;
-        public FrmCounterDiscount()
+        private Int64 m_BranchID = 0;
+        public FrmCounterSale()
         {
             InitializeComponent();
         }
 
-        private void FrmCounterDiscount_Load(object sender, EventArgs e)
+        private void Label2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void FrmCounterSale_Load(object sender, EventArgs e)
         {
             Shop Objshop = new Shop();
             foreach (var shopModel in Objshop.GetAllShops())
@@ -28,11 +32,11 @@ namespace Wines.WinForm.Forms
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             FillGrid();
 
-            //grid.Columns["Branch_Name"].Width = 250;
-            //grid.Columns["Active"].Width = 100;
-            //grid.Columns["Address"].Width = 200;
-            //grid.Columns["MobileNo"].Width = 150;
-            //grid.Columns["Advance"].Width = 120;
+            grid.Columns["Branch_Name"].Width = 250;
+            grid.Columns["Active"].Width = 100;
+            grid.Columns["Address"].Width = 200;
+            grid.Columns["MobileNo"].Width = 150;
+            grid.Columns["Advance"].Width = 120;
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -44,29 +48,29 @@ namespace Wines.WinForm.Forms
             BtnDelete.Enabled = false;
             BtnSave.Enabled = true;
             BtnCancel.Enabled = true;
-            m_CounterDiscount_ID = 0;
+            m_BranchID = 0;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (CboShop.Items[CboShop.SelectedIndex] is ShopModel selectedShop)
             {
-                var CounterDis = new CounterDiscount();
+                var Branch = new Branch();
                 var result = 0;
 
-                if (m_CounterDiscount_ID > 0)
+                if (m_BranchID > 0)
                 {
                     // we are in edit mode
 //                    public int Update(long lngID, long lngShopID, string strBranchName, string strAddress, bool bActive,
   //                                 string strMobileNo, long lngAdvance, string strReserve1)
 
-                    result = CounterDis.Update(m_CounterDiscount_ID, selectedShop.ID, 1, dtDiscountDate.Value, 
-                                        NBDiscountAmt.Value, TxtDescription.Text, TxtReserve.Text);
+                    result = Branch.Update(m_BranchID, selectedShop.ID, TxtBranchName.Text, TxtAddress.Text, cbkActive.Checked, 
+                        TxtMobile.Text, NBAdvance.Value, TxtReserve.Text);
                 }
                 else
                 {
-                    result = CounterDis.Add(selectedShop.ID, 1, dtDiscountDate.Value,
-                                        NBDiscountAmt.Value, TxtDescription.Text, TxtReserve.Text);
+                    result = Branch.Add(selectedShop.ID, TxtBranchName.Text, TxtAddress.Text, cbkActive.Checked,
+                        TxtMobile.Text, NBAdvance.Value, TxtReserve.Text);
 
                 }
 
@@ -98,23 +102,12 @@ namespace Wines.WinForm.Forms
 
         private void FillGrid()
         {
-            BCL.CounterDiscount CounterDis = new BCL.CounterDiscount();
-            grid.DataSource = CounterDis.GetAllCounterDiscounts();
+            BCL.Branch branch = new BCL.Branch();
+            grid.DataSource = branch.GetAllBranchs();
             if (grid.Columns["ID"] != null)
             {
                 grid.Columns["ID"].Visible = false;
             }
-
-            // Fill This Month Discount
-            var today = DateTime.Now;
-            var dtStartDate = new DateTime(today.Year, today.Month, 1);
-            var dtEndDate = dtStartDate.AddMonths(1).AddDays(-1);
-            long monthDisAmount = CounterDis.GetDateRangeDiscount( dtStartDate, dtEndDate);
-            long lngFullYearDiscountAmt = CounterDis.GetDiscountAmount();
-
-            NBMonthDiscount.Value = monthDisAmount;
-            NBTotalDiscount.Value = lngFullYearDiscountAmt;
-
         }
 
         private void Grid_SelectionChanged(object sender, EventArgs e)
@@ -129,17 +122,19 @@ namespace Wines.WinForm.Forms
                 return;
 
             var id = Convert.ToInt64(grid.SelectedRows[0].Cells["ID"].Value);
-            CounterDiscount CounterDis = new CounterDiscount();
-            CounterDiscountModel CounterDisMod = CounterDis.GetAllCounterDiscounts().FirstOrDefault(b => b.ID == id);
-            if (CounterDisMod != null)
+            Branch Branch = new Branch();
+            BranchModel BranchModel = Branch.GetAllBranchs().FirstOrDefault(b => b.ID == id);
+            if (BranchModel != null)
             {
                 //todo: Need to fix selected shop
 
-                m_CounterDiscount_ID = CounterDisMod.ID;
-                dtDiscountDate.Value= CounterDisMod.Discount_Date;
-                NBDiscountAmt.Value = CounterDisMod.Discount_Amt;
-                TxtDescription.Text= CounterDisMod.Description;
-                TxtReserve.Text = CounterDisMod.Reserve1;
+                m_BranchID = BranchModel.ID;
+                TxtBranchName.Text = BranchModel.Branch_Name;
+                cbkActive.Checked = BranchModel.Active;
+                TxtMobile.Text = BranchModel.MobileNo;
+                TxtAddress.Text= BranchModel.Address;
+                NBAdvance.Value = BranchModel.Advance;
+                TxtReserve.Text = BranchModel.Reserve1;
             }
 
         }
@@ -150,7 +145,7 @@ namespace Wines.WinForm.Forms
             if (result == DialogResult.Yes)
             {
                 BCL.Branch ObjBranch = new Branch();
-                ObjBranch.DeleteBranch(m_CounterDiscount_ID);
+                ObjBranch.DeleteBranch(m_BranchID);
                 FillGrid();
             }
         }
@@ -169,11 +164,6 @@ namespace Wines.WinForm.Forms
         private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }
-
-        private void cmdClose_Click(object sender, EventArgs e)
-        {
-            Close();
         }
     }
 }
