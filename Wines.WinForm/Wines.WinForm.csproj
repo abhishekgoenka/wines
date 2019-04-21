@@ -98,7 +98,7 @@
   <ItemGroup>
     <Compile Include="BCL\Auth.cs" />
     <Compile Include="BCL\Branch.cs" />
-    <Compile Include="BCL\BranchSaleDay.cs" />
+    <Compile Include="BCL\BranchSaleDetail.cs" />
     <Compile Include="BCL\CounterSale.cs" />
     <Compile Include="BCL\BranchSale.cs" />
     <Compile Include="BCL\Brand.cs" />
@@ -110,11 +110,11 @@
     <Compile Include="BCL\User.cs" />
     <Compile Include="Common\Helper.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
-    <Compile Include="Forms\FrmBranchSaleDay.cs">
+    <Compile Include="Forms\FrmBranchSaleDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmBranchSaleDay.Designer.cs">
-      <DependentUpon>FrmBranchSaleDay.cs</DependentUpon>
+    <Compile Include="Forms\FrmBranchSaleDetail.Designer.cs">
+      <DependentUpon>FrmBranchSaleDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmCounterSale.cs">
       <SubType>Form</SubType>
@@ -171,7 +171,7 @@
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\BranchModel.cs" />
-    <Compile Include="Models\BranchSaleDayModel.cs" />
+    <Compile Include="Models\BranchSaleDetailModel.cs" />
     <Compile Include="Models\CounterSaleModel.cs" />
     <Compile Include="Models\BranchSaleModel.cs" />
     <Compile Include="Models\BrandModel.cs" />
@@ -183,8 +183,8 @@
     <Compile Include="Reports\Report.cs" />
     <Compile Include="Reports\ReportHelper.cs" />
     <Compile Include="Reports\ReportType.cs" />
-    <EmbeddedResource Include="Forms\FrmBranchSaleDay.resx">
-      <DependentUpon>FrmBranchSaleDay.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmBranchSaleDetail.resx">
+      <DependentUpon>FrmBranchSaleDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmCounterSale.resx">
       <DependentUpon>FrmCounterSale.cs</DependentUpon>

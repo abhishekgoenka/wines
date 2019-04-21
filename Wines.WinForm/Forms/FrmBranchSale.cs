@@ -27,8 +27,6 @@ namespace Wines.WinForm.Forms
             }
             CboShop.SelectedIndex = 0;
 
-
-
             BranchModel branchModelall = new BranchModel();
             branchModelall.Branch_Name = "ALL";
             CboBranch.Items.Add(branchModelall);
@@ -39,47 +37,15 @@ namespace Wines.WinForm.Forms
                 CboBranch.Items.Add(branchModel);
             }
 
+            BtnAdd.Enabled = false;
+            BtnEdit.Enabled = false;
+
             gridSummary.EditMode = DataGridViewEditMode.EditProgrammatically;
             gridSummary.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
         }
 
-        private void BtnAdd_Click(object sender, EventArgs e)
-        {
-
-            BtnAdd.Enabled = false;
-            BtnEdit.Enabled = false;
-            BtnDelete.Enabled = false;
-            BtnSave.Enabled = true;
-            BtnCancel.Enabled = true;
-            m_BranchID = 0;
-        }
-
-        private void BtnSave_Click(object sender, EventArgs e)
-        {
-            if (CboShop.Items[CboShop.SelectedIndex] is ShopModel selectedShop)
-            {
-
-                BtnAdd.Enabled = true;
-                BtnEdit.Enabled = true;
-                BtnDelete.Enabled = true;
-                BtnSave.Enabled = false;
-                BtnCancel.Enabled = false;
-                FillGrid();
-            }
-        }
-
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            BtnAdd.Enabled = true;
-            BtnEdit.Enabled = true;
-            BtnDelete.Enabled = true;
-            BtnSave.Enabled = false;
-            BtnCancel.Enabled = false;
-            FillGrid();
-        }
-
-        private void FillGrid()
+        private void FillGridSummary()
         {
             BCL.BranchSale Objbranchsale = new BCL.BranchSale();
             gridSummary.DataSource = Objbranchsale.GetAllBranchSales(m_BranchID);
@@ -92,6 +58,32 @@ namespace Wines.WinForm.Forms
 
             if (gridSummary.Columns["User_ID"] != null)
                 gridSummary.Columns["User_ID"].Visible = false;
+
+        }
+        private void FillGridDetail()
+        {
+            if (gridSummary.SelectedRows.Count == 0)
+                return;
+
+            long lngSaleSummaryID = Convert.ToInt32(gridSummary.SelectedRows[0].Cells["ID"]);
+
+            BCL.BranchSaleDetail ObjbranchsaleDetail = new BCL.BranchSaleDetail();
+            gridDetail.DataSource = ObjbranchsaleDetail.GetAllBranchSaleDetail(m_BranchID, lngSaleSummaryID);
+
+            if (gridDetail.Columns["ID"] != null)
+                gridDetail.Columns["ID"].Visible = false;
+
+            if (gridDetail.Columns["Shop_ID"] != null)
+                gridDetail.Columns["Shop_ID"].Visible = false;
+
+            if (gridDetail.Columns["User_ID"] != null)
+                gridDetail.Columns["User_ID"].Visible = false;
+
+            if (gridDetail.Columns["Branch_ID"] != null)
+                gridDetail.Columns["Branch_ID"].Visible = false;
+
+            if (gridDetail.Columns["BS_Summary_ID"] != null)
+                gridDetail.Columns["BS_Summary_ID"].Visible = false;
 
         }
 
@@ -118,39 +110,56 @@ namespace Wines.WinForm.Forms
 
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show(@"Delete?", @"Delete", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes)
-            {
-                BCL.Branch ObjBranch = new Branch();
-                ObjBranch.DeleteBranch(m_BranchID);
-                FillGrid();
-            }
+            FrmBranchSaleDetail frmBSaleDetail = new FrmBranchSaleDetail();
+            frmBSaleDetail.m_BranchID = this.m_BranchID;
+            frmBSaleDetail.m_BranchName = CboBranch.Text;
+
+            frmBSaleDetail.ShowDialog();
+
+            FillGridSummary();
+            FillGridDetail();
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
+            if (gridSummary.SelectedRows.Count == 0)
+                return;
 
-            BtnAdd.Enabled = false;
-            BtnEdit.Enabled = false;
-            BtnDelete.Enabled = false;
-            BtnSave.Enabled = true;
-            BtnCancel.Enabled = true;
-        }
+            long lngSaleSummaryID = Convert.ToInt32(gridSummary.SelectedRows[0].Cells["ID"]);
+            if (lngSaleSummaryID == 0)
+                return;
 
-        private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+            FrmBranchSaleDetail frmBSaleDetail = new FrmBranchSaleDetail();            
+            frmBSaleDetail.m_BranchID = this.m_BranchID;
+            frmBSaleDetail.m_BranchName = CboBranch.Text;
 
+            frmBSaleDetail.m_BranchSaleSummaryID = lngSaleSummaryID;
+
+            frmBSaleDetail.ShowDialog();
+            FillGridSummary();
+            FillGridDetail();
         }
 
         private void CboBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CboBranch.Enabled = false;
-
             BCL.Branch Objbranch = new BCL.Branch();
             m_BranchID = Objbranch.GetBranchID(CboBranch.Text);
-            FillGrid();
+            FillGridSummary();
+            FillGridDetail();
+
+            if (CboBranch.SelectedIndex == 0)
+            {
+                BtnAdd.Enabled = false;
+                BtnEdit.Enabled = false;
+            }
+            else
+            {
+                BtnAdd.Enabled = true;
+                BtnEdit.Enabled = true;
+            }
+
         }
     }
 }

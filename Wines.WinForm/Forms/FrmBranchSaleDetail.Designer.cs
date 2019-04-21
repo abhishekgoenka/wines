@@ -1,6 +1,6 @@
 ﻿namespace Wines.WinForm.Forms
 {
-    partial class FrmBranchSaleDay
+    partial class FrmBranchSaleDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBranchSale));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBranchSaleDetail));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -49,7 +49,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.TxtAddress = new System.Windows.Forms.TextBox();
             this.cbkActive = new System.Windows.Forms.CheckBox();
-            this.CmbBranch = new System.Windows.Forms.ComboBox();
+            this.CboBranch = new System.Windows.Forms.ComboBox();
+            this.dtDiscountDate = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.TxtPreBalance = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.NBAdvance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.GBControls.SuspendLayout();
@@ -67,7 +71,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(608, 12);
+            this.label2.Location = new System.Drawing.Point(584, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 18);
             this.label2.TabIndex = 1;
@@ -77,7 +81,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 124);
+            this.label4.Location = new System.Drawing.Point(33, 74);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(81, 18);
             this.label4.TabIndex = 4;
@@ -86,7 +90,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(33, 172);
+            this.label5.Location = new System.Drawing.Point(33, 122);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(71, 18);
             this.label5.TabIndex = 8;
@@ -95,7 +99,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(585, 172);
+            this.label9.Location = new System.Drawing.Point(585, 122);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(78, 18);
             this.label9.TabIndex = 10;
@@ -112,14 +116,14 @@
             // 
             // TxtBranchName
             // 
-            this.TxtBranchName.Location = new System.Drawing.Point(168, 73);
+            this.TxtBranchName.Location = new System.Drawing.Point(168, 23);
             this.TxtBranchName.Name = "TxtBranchName";
             this.TxtBranchName.Size = new System.Drawing.Size(321, 26);
             this.TxtBranchName.TabIndex = 2;
             // 
             // NBAdvance
             // 
-            this.NBAdvance.Location = new System.Drawing.Point(168, 170);
+            this.NBAdvance.Location = new System.Drawing.Point(168, 120);
             this.NBAdvance.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -131,7 +135,7 @@
             // 
             // TxtReserve
             // 
-            this.TxtReserve.Location = new System.Drawing.Point(669, 169);
+            this.TxtReserve.Location = new System.Drawing.Point(669, 119);
             this.TxtReserve.Name = "TxtReserve";
             this.TxtReserve.Size = new System.Drawing.Size(321, 26);
             this.TxtReserve.TabIndex = 11;
@@ -211,15 +215,16 @@
             this.GBControls.Controls.Add(this.label9);
             this.GBControls.Controls.Add(this.TxtBranchName);
             this.GBControls.Controls.Add(this.NBAdvance);
-            this.GBControls.Location = new System.Drawing.Point(53, 60);
+            this.GBControls.Location = new System.Drawing.Point(53, 102);
             this.GBControls.Name = "GBControls";
-            this.GBControls.Size = new System.Drawing.Size(1041, 213);
+            this.GBControls.Size = new System.Drawing.Size(1041, 173);
             this.GBControls.TabIndex = 24;
             this.GBControls.TabStop = false;
+            this.GBControls.Enter += new System.EventHandler(this.GBControls_Enter);
             // 
             // TxtMobile
             // 
-            this.TxtMobile.Location = new System.Drawing.Point(168, 124);
+            this.TxtMobile.Location = new System.Drawing.Point(168, 74);
             this.TxtMobile.Name = "TxtMobile";
             this.TxtMobile.Size = new System.Drawing.Size(321, 26);
             this.TxtMobile.TabIndex = 5;
@@ -228,7 +233,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(596, 124);
+            this.label3.Location = new System.Drawing.Point(596, 74);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 18);
             this.label3.TabIndex = 6;
@@ -236,7 +241,7 @@
             // 
             // TxtAddress
             // 
-            this.TxtAddress.Location = new System.Drawing.Point(669, 124);
+            this.TxtAddress.Location = new System.Drawing.Point(669, 74);
             this.TxtAddress.Name = "TxtAddress";
             this.TxtAddress.Size = new System.Drawing.Size(321, 26);
             this.TxtAddress.TabIndex = 7;
@@ -245,28 +250,66 @@
             // cbkActive
             // 
             this.cbkActive.AutoSize = true;
-            this.cbkActive.Location = new System.Drawing.Point(669, 80);
+            this.cbkActive.Location = new System.Drawing.Point(669, 14);
             this.cbkActive.Name = "cbkActive";
             this.cbkActive.Size = new System.Drawing.Size(75, 22);
             this.cbkActive.TabIndex = 3;
             this.cbkActive.Text = "Active";
             this.cbkActive.UseVisualStyleBackColor = true;
             // 
-            // CmbBranch
+            // CboBranch
             // 
-            this.CmbBranch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbBranch.FormattingEnabled = true;
-            this.CmbBranch.Location = new System.Drawing.Point(739, 12);
-            this.CmbBranch.Name = "CmbBranch";
-            this.CmbBranch.Size = new System.Drawing.Size(321, 26);
-            this.CmbBranch.TabIndex = 25;
+            this.CboBranch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CboBranch.Enabled = false;
+            this.CboBranch.FormattingEnabled = true;
+            this.CboBranch.Location = new System.Drawing.Point(739, 12);
+            this.CboBranch.Name = "CboBranch";
+            this.CboBranch.Size = new System.Drawing.Size(321, 26);
+            this.CboBranch.TabIndex = 25;
             // 
-            // FrmBranchSale
+            // dtDiscountDate
+            // 
+            this.dtDiscountDate.Location = new System.Drawing.Point(221, 53);
+            this.dtDiscountDate.Name = "dtDiscountDate";
+            this.dtDiscountDate.Size = new System.Drawing.Size(321, 26);
+            this.dtDiscountDate.TabIndex = 13;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(64, 59);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 18);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Date";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(583, 53);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(133, 18);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Previous Balance";
+            // 
+            // TxtPreBalance
+            // 
+            this.TxtPreBalance.Enabled = false;
+            this.TxtPreBalance.Location = new System.Drawing.Point(739, 50);
+            this.TxtPreBalance.Name = "TxtPreBalance";
+            this.TxtPreBalance.Size = new System.Drawing.Size(321, 26);
+            this.TxtPreBalance.TabIndex = 27;
+            // 
+            // FrmBranchSaleDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 614);
-            this.Controls.Add(this.CmbBranch);
+            this.Controls.Add(this.TxtPreBalance);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.CboBranch);
+            this.Controls.Add(this.dtDiscountDate);
             this.Controls.Add(this.GBControls);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnSave);
@@ -283,7 +326,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FrmBranchSaleDay";
+            this.Name = "FrmBranchSaleDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Branch Sale Day";
             this.Load += new System.EventHandler(this.FrmBranchSaleDay_Load);
@@ -318,6 +361,10 @@
         private System.Windows.Forms.TextBox TxtMobile;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TxtAddress;
-        private System.Windows.Forms.ComboBox CmbBranch;
+        private System.Windows.Forms.ComboBox CboBranch;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker dtDiscountDate;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox TxtPreBalance;
     }
 }

@@ -35,9 +35,6 @@
             this.gridSummary = new System.Windows.Forms.DataGridView();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
-            this.BtnDelete = new System.Windows.Forms.Button();
-            this.BtnSave = new System.Windows.Forms.Button();
-            this.BtnCancel = new System.Windows.Forms.Button();
             this.CboBranch = new System.Windows.Forms.ComboBox();
             this.gridDetail = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
@@ -81,13 +78,12 @@
             this.gridSummary.Name = "gridSummary";
             this.gridSummary.Size = new System.Drawing.Size(1107, 251);
             this.gridSummary.TabIndex = 17;
-            this.gridSummary.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellContentClick);
             this.gridSummary.SelectionChanged += new System.EventHandler(this.Grid_SelectionChanged);
             this.gridSummary.DoubleClick += new System.EventHandler(this.Grid_DoubleClick);
             // 
             // BtnAdd
             // 
-            this.BtnAdd.Location = new System.Drawing.Point(52, 618);
+            this.BtnAdd.Location = new System.Drawing.Point(36, 618);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(100, 30);
             this.BtnAdd.TabIndex = 12;
@@ -97,45 +93,13 @@
             // 
             // BtnEdit
             // 
-            this.BtnEdit.Location = new System.Drawing.Point(304, 618);
+            this.BtnEdit.Location = new System.Drawing.Point(171, 618);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(100, 30);
             this.BtnEdit.TabIndex = 13;
             this.BtnEdit.Text = "Edit";
             this.BtnEdit.UseVisualStyleBackColor = true;
             this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
-            // 
-            // BtnDelete
-            // 
-            this.BtnDelete.Location = new System.Drawing.Point(540, 618);
-            this.BtnDelete.Name = "BtnDelete";
-            this.BtnDelete.Size = new System.Drawing.Size(100, 30);
-            this.BtnDelete.TabIndex = 14;
-            this.BtnDelete.Text = "Delete";
-            this.BtnDelete.UseVisualStyleBackColor = true;
-            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
-            // 
-            // BtnSave
-            // 
-            this.BtnSave.Enabled = false;
-            this.BtnSave.Location = new System.Drawing.Point(759, 618);
-            this.BtnSave.Name = "BtnSave";
-            this.BtnSave.Size = new System.Drawing.Size(100, 30);
-            this.BtnSave.TabIndex = 15;
-            this.BtnSave.Text = "Save";
-            this.BtnSave.UseVisualStyleBackColor = true;
-            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
-            // 
-            // BtnCancel
-            // 
-            this.BtnCancel.Enabled = false;
-            this.BtnCancel.Location = new System.Drawing.Point(959, 618);
-            this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new System.Drawing.Size(100, 30);
-            this.BtnCancel.TabIndex = 16;
-            this.BtnCancel.Text = "Cancel";
-            this.BtnCancel.UseVisualStyleBackColor = true;
-            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // CboBranch
             // 
@@ -184,10 +148,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.gridDetail);
             this.Controls.Add(this.CboBranch);
-            this.Controls.Add(this.BtnCancel);
-            this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.CboShop);
             this.Controls.Add(this.BtnEdit);
             this.Controls.Add(this.label1);
@@ -219,9 +180,6 @@
         private System.Windows.Forms.DataGridView gridSummary;
         private System.Windows.Forms.Button BtnAdd;
         private System.Windows.Forms.Button BtnEdit;
-        private System.Windows.Forms.Button BtnDelete;
-        private System.Windows.Forms.Button BtnSave;
-        private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.DataGridView gridDetail;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

@@ -7,7 +7,7 @@ using Wines.WinForm.Models;
 
 namespace Wines.WinForm.BCL
 {
-    internal class BranchSaleDay
+    internal class BranchSaleDetail
     {
         /// <summary>
         ///     Add new Branch
@@ -146,20 +146,22 @@ namespace Wines.WinForm.BCL
         ///     Returns all the Branchs in system
         /// </summary>
         /// <returns></returns>
-        public List<BranchSaleModel> GetAllBranchSales(long BranchID)
+        public List<BranchSaleDetailModel> GetAllBranchSaleDetail(long BranchID, long SaleSummaryID)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "SELECT ID, Shop_ID, Branch_ID, Sale_Date, Modify_Date, " +
-                "Previous_Amt, Sale_Amt_With_Comm, Commission_Amt, Sale_Amt_After_Comm, " +
-                "Deposit, Balance, Reserve1 FROM Branch;";
+                "SELECT ID, Shop_ID, User_ID, Branch_ID, BS_Summary_ID, Sale_Date, Modify_Date, " +
+                "Brand_ID, Quantity, Rate, Amount, Commission, Reserve1 FROM Branch_Sale_Detail WHERE 1=1;";
 
             if (BranchID != 0)
-                command.CommandText = command.CommandText + " WHERE Branch_ID = " + BranchID + " Order By Modify_Date Desc";
-            else
-                command.CommandText = command.CommandText + " WHERE Order By Modify_Date Desc";
+                command.CommandText = command.CommandText + " AND Branch_ID = " + BranchID ;
 
-            return Helper.ConvertDataTable<BranchSaleModel>(DataAccess.ExecuteSelectCommand(command));
+            if (SaleSummaryID != 0)
+                command.CommandText = command.CommandText + " AND BS_Summary_ID = " + SaleSummaryID ;
+
+            command.CommandText = command.CommandText + " Order By Modify_Date Desc;";
+
+            return Helper.ConvertDataTable<BranchSaleDetailModel>(DataAccess.ExecuteSelectCommand(command));
         }
 
         /// <summary>
