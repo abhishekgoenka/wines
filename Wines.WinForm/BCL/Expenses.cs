@@ -31,13 +31,13 @@ namespace Wines.WinForm.BCL
             parameter = command.CreateParameter();
             parameter.ParameterName = "@Exp_Date";
             parameter.Value = dtExpDate;
-            parameter.DbType = DbType.DateTime;
+            parameter.DbType = DbType.Date;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
             parameter.ParameterName = "@Modify_Date";
             parameter.Value = System.DateTime.Today;
-            parameter.DbType = DbType.DateTime;
+            parameter.DbType = DbType.Date;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
@@ -91,13 +91,13 @@ namespace Wines.WinForm.BCL
             parameter = command.CreateParameter();
             parameter.ParameterName = "@Exp_Date";
             parameter.Value = dtExpDate;
-            parameter.DbType = DbType.DateTime;
+            parameter.DbType = DbType.Date;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
             parameter.ParameterName = "@Modify_Date";
             parameter.Value = System.DateTime.Today;
-            parameter.DbType = DbType.DateTime;
+            parameter.DbType = DbType.Date;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();

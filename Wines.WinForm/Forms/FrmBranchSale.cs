@@ -27,6 +27,9 @@ namespace Wines.WinForm.Forms
             }
             CboShop.SelectedIndex = 0;
 
+            BtnAdd.Enabled = false;
+            BtnEdit.Enabled = false;
+
             BranchModel branchModelall = new BranchModel();
             branchModelall.Branch_Name = "ALL";
             CboBranch.Items.Add(branchModelall);
@@ -37,8 +40,9 @@ namespace Wines.WinForm.Forms
                 CboBranch.Items.Add(branchModel);
             }
 
-            BtnAdd.Enabled = false;
-            BtnEdit.Enabled = false;
+            if (CboBranch.Items.Count > 1 )
+                CboBranch.SelectedIndex = 1;
+
 
             gridSummary.EditMode = DataGridViewEditMode.EditProgrammatically;
             gridSummary.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -90,6 +94,11 @@ namespace Wines.WinForm.Forms
         private void Grid_SelectionChanged(object sender, EventArgs e)
         {
             // Update the labels to reflect changes to the selection.
+            Grid_DoubleClick(sender, e);
+        }
+
+        private void grid_SelectionChanged(object sender, EventArgs e)
+        {
             Grid_DoubleClick(sender, e);
         }
 

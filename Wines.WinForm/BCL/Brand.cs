@@ -184,6 +184,73 @@ namespace Wines.WinForm.BCL
             return Helper.ConvertDataTable<BrandModel>(DataAccess.ExecuteSelectCommand(command));
         }
 
+        public List<BrandModel> GetUniueqBrandName(string strLiqType)
+        {
+            var command = DataAccess.CreateCommand(CommandType.Text);
+            command.CommandText =
+                "SELECT ID, Shop_ID, Category, Liq_Name, Box, Weight, Purchase_Rate, Sale_Rate, Branch_Commision, Reserve1 FROM Brands WHERE 1=1 ";
+            if ( strLiqType.Length != 0)
+                command.CommandText += " AND UPPER(Category)='" + strLiqType.ToUpper() + "' ";
+
+            command.CommandText += " GROUP BY UPPER(Liq_Name) ";
+            command.CommandText += " ORDER BY UPPER(Liq_Name) ";
+
+            return Helper.ConvertDataTable<BrandModel>(DataAccess.ExecuteSelectCommand(command));
+        }
+
+        public List<BrandModel> GetUniueqBrandSize(string strLiqType, string strBrandName)
+        {
+            var command = DataAccess.CreateCommand(CommandType.Text);
+            command.CommandText =
+                "SELECT ID, Shop_ID, Category, Liq_Name, Box, Weight, Purchase_Rate, Sale_Rate, Branch_Commision, Reserve1 FROM Brands WHERE 1=1 ";
+            if (strLiqType.Length != 0)
+                command.CommandText += " AND UPPER(Category)='" + strLiqType.ToUpper() + "' ";
+
+            if (strBrandName.Length != 0)
+                command.CommandText += " AND UPPER(Liq_Name)='" + strBrandName.ToUpper() + "' ";
+
+            command.CommandText += " GROUP BY UPPER(Weight) ";
+            command.CommandText += " ORDER BY UPPER(Weight) ";
+
+            return Helper.ConvertDataTable<BrandModel>(DataAccess.ExecuteSelectCommand(command));
+        }
+
+        public List<BrandModel> GetBrandDetail(string strLiqType, string strBrandName, long lngWeight )
+        {
+            var command = DataAccess.CreateCommand(CommandType.Text);
+            command.CommandText =
+                "SELECT ID, Shop_ID, Category, Liq_Name, Box, Weight, Purchase_Rate, Sale_Rate, Branch_Commision, Reserve1 FROM Brands WHERE 1=1 ";
+            if (strLiqType.Length != 0)
+                command.CommandText += " AND UPPER(Category)='" + strLiqType.ToUpper() + "' ";
+
+            if (strBrandName.Length != 0)
+                command.CommandText += " AND UPPER(Liq_Name)='" + strBrandName.ToUpper() + "' ";
+
+            if (lngWeight != 0)
+                command.CommandText += " AND Weight =" + lngWeight;
+            
+            command.CommandText += " GROUP BY UPPER(Weight) ";
+            command.CommandText += " ORDER BY UPPER(Weight) ";
+
+            DataTable dt = DataAccess.ExecuteSelectCommand(command);
+
+            return Helper.ConvertDataTable<BrandModel>(dt);
+        }
+        public List<BrandModel> GetBrandDetail( long lngID)
+        {
+            var command = DataAccess.CreateCommand(CommandType.Text);
+            command.CommandText =
+                "SELECT ID, Shop_ID, Category, Liq_Name, Box, Weight, " +
+                    "Purchase_Rate, Sale_Rate, Branch_Commision, Reserve1 FROM Brands" +
+                    " WHERE ID = " + lngID;
+
+            DataTable dt = DataAccess.ExecuteSelectCommand(command);
+
+            return Helper.ConvertDataTable<BrandModel>(dt);
+        }
+
+
+
         /// <summary>
         /// Delete Brand
         /// </summary>

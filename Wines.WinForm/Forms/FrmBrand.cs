@@ -146,5 +146,40 @@ namespace Wines.WinForm.Forms
                 }
             }
         }
+
+        private void NBBox_Enter(object sender, EventArgs e)
+        {
+            NBBox.Select(0, NBBox.ToString().Length);
+        }
+
+        private void NBWeight_Enter(object sender, EventArgs e)
+        {
+            NBWeight.Select(0, NBWeight.ToString().Length);
+        }
+
+        private void NBPurchaseRate_Enter(object sender, EventArgs e)
+        {
+            NBPurchaseRate.Select(0, NBPurchaseRate.ToString().Length);
+        }
+
+        private void NBSaleRate_Enter(object sender, EventArgs e)
+        {
+            NBSaleRate.Select(0, NBSaleRate.ToString().Length);
+        }
+
+        private void NBBranchCommission_Enter(object sender, EventArgs e)
+        {
+            NBBranchCommission.Select(0, NBSaleRate.ToString().Length);
+        }
+
+        private void grid_SelectionChanged(object sender, EventArgs e)
+        {
+            Grid_Click(sender, e);
+        }
+
+        private void NBSaleRate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

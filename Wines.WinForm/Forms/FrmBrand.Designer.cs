@@ -66,7 +66,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(27, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 14);
+            this.label2.Size = new System.Drawing.Size(77, 18);
             this.label2.TabIndex = 1;
             this.label2.Text = "Category";
             this.label2.Click += new System.EventHandler(this.Label2_Click);
@@ -76,8 +76,8 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(27, 49);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 14);
-            this.label3.TabIndex = 2;
+            this.label3.Size = new System.Drawing.Size(53, 18);
+            this.label3.TabIndex = 3;
             this.label3.Text = "Liquor";
             // 
             // label4
@@ -85,8 +85,8 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(27, 76);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(30, 14);
-            this.label4.TabIndex = 3;
+            this.label4.Size = new System.Drawing.Size(37, 18);
+            this.label4.TabIndex = 5;
             this.label4.Text = "Box";
             // 
             // label5
@@ -94,8 +94,8 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(27, 103);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 14);
-            this.label5.TabIndex = 4;
+            this.label5.Size = new System.Drawing.Size(58, 18);
+            this.label5.TabIndex = 7;
             this.label5.Text = "Weight";
             // 
             // label6
@@ -103,8 +103,8 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(27, 130);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(98, 14);
-            this.label6.TabIndex = 5;
+            this.label6.Size = new System.Drawing.Size(114, 18);
+            this.label6.TabIndex = 9;
             this.label6.Text = "Purchase Rate";
             // 
             // label7
@@ -112,8 +112,8 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(27, 157);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(67, 14);
-            this.label7.TabIndex = 6;
+            this.label7.Size = new System.Drawing.Size(78, 18);
+            this.label7.TabIndex = 11;
             this.label7.Text = "Sale Rate";
             // 
             // label8
@@ -121,8 +121,8 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(27, 184);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(129, 14);
-            this.label8.TabIndex = 7;
+            this.label8.Size = new System.Drawing.Size(156, 18);
+            this.label8.TabIndex = 13;
             this.label8.Text = "Branch Commission";
             // 
             // label9
@@ -130,58 +130,89 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(27, 211);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(66, 14);
-            this.label9.TabIndex = 8;
+            this.label9.Size = new System.Drawing.Size(78, 18);
+            this.label9.TabIndex = 15;
             this.label9.Text = "Reserve1";
             // 
             // TxtLiquor
             // 
             this.TxtLiquor.Location = new System.Drawing.Point(162, 49);
             this.TxtLiquor.Name = "TxtLiquor";
-            this.TxtLiquor.Size = new System.Drawing.Size(321, 22);
-            this.TxtLiquor.TabIndex = 2;
+            this.TxtLiquor.Size = new System.Drawing.Size(321, 26);
+            this.TxtLiquor.TabIndex = 4;
             // 
             // NBBox
             // 
             this.NBBox.Location = new System.Drawing.Point(162, 76);
+            this.NBBox.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.NBBox.Name = "NBBox";
-            this.NBBox.Size = new System.Drawing.Size(120, 22);
-            this.NBBox.TabIndex = 3;
+            this.NBBox.Size = new System.Drawing.Size(120, 26);
+            this.NBBox.TabIndex = 6;
+            this.NBBox.Enter += new System.EventHandler(this.NBBox_Enter);
             // 
             // NBWeight
             // 
             this.NBWeight.Location = new System.Drawing.Point(162, 103);
+            this.NBWeight.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.NBWeight.Name = "NBWeight";
-            this.NBWeight.Size = new System.Drawing.Size(120, 22);
-            this.NBWeight.TabIndex = 4;
+            this.NBWeight.Size = new System.Drawing.Size(120, 26);
+            this.NBWeight.TabIndex = 8;
+            this.NBWeight.Enter += new System.EventHandler(this.NBWeight_Enter);
             // 
             // NBPurchaseRate
             // 
             this.NBPurchaseRate.Location = new System.Drawing.Point(162, 130);
+            this.NBPurchaseRate.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.NBPurchaseRate.Name = "NBPurchaseRate";
-            this.NBPurchaseRate.Size = new System.Drawing.Size(120, 22);
-            this.NBPurchaseRate.TabIndex = 5;
+            this.NBPurchaseRate.Size = new System.Drawing.Size(120, 26);
+            this.NBPurchaseRate.TabIndex = 10;
+            this.NBPurchaseRate.Enter += new System.EventHandler(this.NBPurchaseRate_Enter);
             // 
             // NBSaleRate
             // 
             this.NBSaleRate.Location = new System.Drawing.Point(162, 157);
+            this.NBSaleRate.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.NBSaleRate.Name = "NBSaleRate";
-            this.NBSaleRate.Size = new System.Drawing.Size(120, 22);
-            this.NBSaleRate.TabIndex = 6;
+            this.NBSaleRate.Size = new System.Drawing.Size(120, 26);
+            this.NBSaleRate.TabIndex = 12;
+            this.NBSaleRate.ValueChanged += new System.EventHandler(this.NBSaleRate_ValueChanged);
+            this.NBSaleRate.Enter += new System.EventHandler(this.NBSaleRate_Enter);
             // 
             // NBBranchCommission
             // 
             this.NBBranchCommission.Location = new System.Drawing.Point(162, 184);
+            this.NBBranchCommission.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.NBBranchCommission.Name = "NBBranchCommission";
-            this.NBBranchCommission.Size = new System.Drawing.Size(120, 22);
-            this.NBBranchCommission.TabIndex = 7;
+            this.NBBranchCommission.Size = new System.Drawing.Size(120, 26);
+            this.NBBranchCommission.TabIndex = 14;
+            this.NBBranchCommission.Enter += new System.EventHandler(this.NBBranchCommission_Enter);
             // 
             // TxtReserve
             // 
             this.TxtReserve.Location = new System.Drawing.Point(162, 211);
             this.TxtReserve.Name = "TxtReserve";
-            this.TxtReserve.Size = new System.Drawing.Size(321, 22);
-            this.TxtReserve.TabIndex = 8;
+            this.TxtReserve.Size = new System.Drawing.Size(321, 26);
+            this.TxtReserve.TabIndex = 16;
             // 
             // grid
             // 
@@ -189,7 +220,8 @@
             this.grid.Location = new System.Drawing.Point(12, 326);
             this.grid.Name = "grid";
             this.grid.Size = new System.Drawing.Size(1110, 276);
-            this.grid.TabIndex = 18;
+            this.grid.TabIndex = 22;
+            this.grid.SelectionChanged += new System.EventHandler(this.grid_SelectionChanged);
             this.grid.Click += new System.EventHandler(this.Grid_Click);
             // 
             // BtnAdd
@@ -197,7 +229,7 @@
             this.BtnAdd.Location = new System.Drawing.Point(49, 290);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(75, 23);
-            this.BtnAdd.TabIndex = 0;
+            this.BtnAdd.TabIndex = 17;
             this.BtnAdd.Text = "Add";
             this.BtnAdd.UseVisualStyleBackColor = true;
             this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
@@ -207,7 +239,7 @@
             this.BtnEdit.Location = new System.Drawing.Point(130, 290);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(75, 23);
-            this.BtnEdit.TabIndex = 1;
+            this.BtnEdit.TabIndex = 18;
             this.BtnEdit.Text = "Edit";
             this.BtnEdit.UseVisualStyleBackColor = true;
             this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
@@ -217,7 +249,7 @@
             this.BtnDelete.Location = new System.Drawing.Point(211, 290);
             this.BtnDelete.Name = "BtnDelete";
             this.BtnDelete.Size = new System.Drawing.Size(75, 23);
-            this.BtnDelete.TabIndex = 2;
+            this.BtnDelete.TabIndex = 19;
             this.BtnDelete.Text = "Delete";
             this.BtnDelete.UseVisualStyleBackColor = true;
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
@@ -228,7 +260,7 @@
             this.BtnSave.Location = new System.Drawing.Point(292, 290);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(75, 23);
-            this.BtnSave.TabIndex = 3;
+            this.BtnSave.TabIndex = 20;
             this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = true;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -239,7 +271,7 @@
             this.BtnCancel.Location = new System.Drawing.Point(373, 290);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(75, 23);
-            this.BtnCancel.TabIndex = 4;
+            this.BtnCancel.TabIndex = 21;
             this.BtnCancel.Text = "Cancel";
             this.BtnCancel.UseVisualStyleBackColor = true;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -274,12 +306,12 @@
             this.CBOCategory.FormattingEnabled = true;
             this.CBOCategory.Location = new System.Drawing.Point(162, 21);
             this.CBOCategory.Name = "CBOCategory";
-            this.CBOCategory.Size = new System.Drawing.Size(321, 22);
-            this.CBOCategory.TabIndex = 9;
+            this.CBOCategory.Size = new System.Drawing.Size(321, 26);
+            this.CBOCategory.TabIndex = 2;
             // 
             // FrmBrand
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 614);
             this.Controls.Add(this.GBControls);

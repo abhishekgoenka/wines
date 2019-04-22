@@ -12,5 +12,11 @@
         public long Sale_Rate { get; set; }
         public long Branch_Commision { get; set; }
         public string Reserve1 { get; set; }
+        public override string ToString()
+        {
+            return Liq_Name;
+        }
+
+
     }
 }

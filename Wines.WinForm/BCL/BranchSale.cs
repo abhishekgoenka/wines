@@ -9,60 +9,81 @@ namespace Wines.WinForm.BCL
 {
     internal class BranchSale
     {
-        /// <summary>
-        ///     Add new Branch
-        /// </summary>
-        /// <param name="ID"></param>
-        /// <param name="Shop_ID"></param>
-        /// <param name="Branch_Name"></param>
-        /// <param name="Box"></param>
-        /// <param name="Address"></param>
-        /// <param name="Active"></param>
-        /// <param name="MobileNo"></param>
-        /// <param name="Advance"></param>
-        /// <param name="reserve1"></param>
-        /// <returns></returns>
-        public int Add(long lngShopID, string strBranchName, string strAddress, bool bActive, 
-                       string strMobileNo, decimal lngAdvance, string strReserve1)
+        public int Add(long lngShop_ID, long lngUser_ID, long lngBranch_ID,
+            System.DateTime dtSale_Date, System.DateTime dtModify_Date, long lngPrevious_Amt,
+            long lngSale_Amt_With_Comm, long lngCommission_Amt, long lngSale_Amt_After_Comm,
+            long lngDeposit, long lngBalance, string strReserve1)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "INSERT INTO Branch (Shop_ID, Branch_Name, Address, Active, MobileNo, Advance, Reserve1) " +
-                "VALUES (@Shop_ID, @Branch_Name, @Address, @Active, @MobileNo, @Advance, @Reserve1)";
+                "INSERT INTO Branch_Sale_Summary(Shop_ID, User_ID, Branch_ID, Sale_Date, Modify_Date, Previous_Amt," +
+                " Sale_Amt_With_Comm, Commission_Amt, Sale_Amt_After_Comm, Deposit, Balance, Reserve1) " +
+                " VALUES (@Shop_ID, @User_ID, @Branch_ID, @Sale_Date, @Modify_Date, @Previous_Amt," +
+                " @Sale_Amt_With_Comm, @Commission_Amt, @Sale_Amt_After_Comm, @Deposit, @Balance, @Reserve1)";
 
             var parameter = command.CreateParameter();
             parameter.ParameterName = "@Shop_ID";
-            parameter.Value = lngShopID;
+            parameter.Value = lngShop_ID;
             parameter.DbType = DbType.Int64;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Branch_Name";
-            parameter.Value = strBranchName;
+            parameter.ParameterName = "@User_ID";
+            parameter.Value = lngUser_ID;
+            parameter.DbType = DbType.Int64;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Branch_ID";
+            parameter.Value = lngBranch_ID;
             parameter.DbType = DbType.String;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Address";
-            parameter.Value = strAddress;
+            parameter.ParameterName = "@Sale_Date";
+            parameter.Value = dtSale_Date;
+            parameter.DbType = DbType.Date;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Modify_Date";
+            parameter.Value = dtModify_Date;
             parameter.DbType = DbType.String;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Active";
-            parameter.Value = bActive;
-            parameter.DbType = DbType.Boolean;
+            parameter.ParameterName = "@Previous_Amt";
+            parameter.Value = lngPrevious_Amt;
+            parameter.DbType = DbType.Int64;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@MobileNo";
-            parameter.Value = strMobileNo;
-            parameter.DbType = DbType.String;
+            parameter.ParameterName = "@Sale_Amt_With_Comm";
+            parameter.Value = lngSale_Amt_With_Comm;
+            parameter.DbType = DbType.Int64;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Advance";
-            parameter.Value = lngAdvance;
+            parameter.ParameterName = "@Commission_Amt";
+            parameter.Value = lngCommission_Amt;
+            parameter.DbType = DbType.Int64;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Sale_Amt_After_Comm";
+            parameter.Value = lngSale_Amt_After_Comm;
+            parameter.DbType = DbType.Int64;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Deposit";
+            parameter.Value = lngDeposit;
+            parameter.DbType = DbType.Int64;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Balance";
+            parameter.Value = lngBalance;
             parameter.DbType = DbType.Int64;
             command.Parameters.Add(parameter);
 
@@ -72,59 +93,88 @@ namespace Wines.WinForm.BCL
             parameter.DbType = DbType.String;
             command.Parameters.Add(parameter);
 
+
             int retVal = DataAccess.ExecuteNonQuery(command);
             return retVal;
         }
 
-        /// <summary>
-        /// Update Branch
-        /// </summary>
-        /// <param name="ID"></param>
-        /// <param name="Shop_ID"></param>
-        /// <param name="Branch_Name"></param>
-        /// <param name="Box"></param>
-        /// <param name="Address"></param>
-        /// <param name="Active"></param>
-        /// <param name="MobileNo"></param>
-        /// <param name="Advance"></param>
-        /// <param name="reserve1"></param>
-        /// <returns></returns>
-        public int Update(long lngID, long lngShopID, string strBranchName, string strAddress, bool bActive,
-                       string strMobileNo, decimal lngAdvance, string strReserve1)
+        public int Update(long lngID, long lngShop_ID, long lngUser_ID, long lngBranch_ID, 
+            System.DateTime dtSale_Date, System.DateTime dtModify_Date,  long lngPrevious_Amt, 
+            long lngSale_Amt_With_Comm, long lngCommission_Amt, long lngSale_Amt_After_Comm, 
+            long lngDeposit, long lngBalance, string strReserve1)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "UPDATE Branch SET Shop_ID = @Shop_ID, Branch_Name = @Branch_Name, Address = @Address, " +
-                " Active = @Active, MobileNo = @MobileNo, Reserve1 = @Reserve1 WHERE ID = @ID";
+                "UPDATE Branch_Sale_Summary SET Shop_ID = @Shop_ID, User_ID= @User_ID, Branch_ID= @Branch_ID, " +
+                " Sale_Date= @Sale_Date, Modify_Date= @Modify_Date, Previous_Amt=@Previous_Amt " +
+                " Sale_Amt_With_Comm=@Sale_Amt_With_Comm, Commission_Amt=@Commission_Amt, Sale_Amt_After_Comm=@Sale_Amt_After_Comm " +
+                " Deposit=@Deposit, Balance=@Balance, Reserve1=@Reserve1 " +
+                " WHERE ID = @ID";
 
             var parameter = command.CreateParameter();
             parameter.ParameterName = "@Shop_ID";
-            parameter.Value = lngShopID;
+            parameter.Value = lngShop_ID;
             parameter.DbType = DbType.Int64;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Branch_Name";
-            parameter.Value = strBranchName;
+            parameter.ParameterName = "@User_ID";
+            parameter.Value = lngUser_ID;
+            parameter.DbType = DbType.Int64;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Branch_ID";
+            parameter.Value = lngBranch_ID;
             parameter.DbType = DbType.String;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Address";
-            parameter.Value = strAddress;
+            parameter.ParameterName = "@Sale_Date";
+            parameter.Value = dtSale_Date;
+            parameter.DbType = DbType.Date;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Modify_Date";
+            parameter.Value = dtModify_Date;
             parameter.DbType = DbType.String;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@Active";
-            parameter.Value = bActive;
-            parameter.DbType = DbType.Boolean;
+            parameter.ParameterName = "@Previous_Amt";
+            parameter.Value = lngPrevious_Amt;
+            parameter.DbType = DbType.Int64;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
-            parameter.ParameterName = "@MobileNo";
-            parameter.Value = strMobileNo;
-            parameter.DbType = DbType.String;
+            parameter.ParameterName = "@Sale_Amt_With_Comm";
+            parameter.Value = lngSale_Amt_With_Comm;
+            parameter.DbType = DbType.Int64;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Commission_Amt";
+            parameter.Value = lngCommission_Amt;
+            parameter.DbType = DbType.Int64;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Sale_Amt_After_Comm";
+            parameter.Value = lngSale_Amt_After_Comm;
+            parameter.DbType = DbType.Int64;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Deposit";
+            parameter.Value = lngDeposit;
+            parameter.DbType = DbType.Int64;
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "@Balance";
+            parameter.Value = lngBalance;
+            parameter.DbType = DbType.Int64;
             command.Parameters.Add(parameter);
 
             parameter = command.CreateParameter();
@@ -146,32 +196,44 @@ namespace Wines.WinForm.BCL
         ///     Returns all the Branchs in system
         /// </summary>
         /// <returns></returns>
-        public List<BranchSaleModel> GetAllBranchSales(long BranchID)
+        public List<BranchSaleModel> GetAllBranchSales(long lngBranch_ID)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
                 "SELECT ID, Shop_ID, Branch_ID, Sale_Date, Modify_Date, " +
                 "Previous_Amt, Sale_Amt_With_Comm, Commission_Amt, Sale_Amt_After_Comm, " +
-                "Deposit, Balance, Reserve1 FROM Branch;";
+                "Deposit, Balance, Reserve1 FROM Branch_Sale_Summary";
 
-            if (BranchID != 0)
-                command.CommandText = command.CommandText + " WHERE Branch_ID = " + BranchID + " Order By Modify_Date Desc";
+            if (lngBranch_ID != 0)
+                command.CommandText = command.CommandText + " WHERE Branch_ID = " + lngBranch_ID + " Order By Modify_Date Desc";
             else
                 command.CommandText = command.CommandText + " WHERE Order By Modify_Date Desc";
 
             return Helper.ConvertDataTable<BranchSaleModel>(DataAccess.ExecuteSelectCommand(command));
         }
 
+        public List<BranchSaleModel> GetLastSavedRecord()
+        {
+            var command = DataAccess.CreateCommand(CommandType.Text);
+            command.CommandText =
+                "SELECT ID, Shop_ID, Branch_ID, Sale_Date, Modify_Date, " +
+                "Previous_Amt, Sale_Amt_With_Comm, Commission_Amt, Sale_Amt_After_Comm, " +
+                "Deposit, Balance, Reserve1 FROM Branch_Sale_Summary ";
+            command.CommandText += " WHERE 1=1 ORDER BY ID DESC LIMIT 1 ";
+
+            return Helper.ConvertDataTable<BranchSaleModel>(DataAccess.ExecuteSelectCommand(command));
+        }
+
         /// <summary>
-        /// Delete Branch
+        /// Delete Branch Sale
         /// </summary>
-        /// <param name="id">Branch ID</param>
+        /// <param name="id">Branch Sale ID</param>
         /// <returns></returns>
         public int DeleteBranchSale(Int64 lngID)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "DELETE FROM Branch WHERE ID = @ID ";
+                "DELETE FROM Branch_Sale_Summary WHERE ID = @ID ";
 
             var parameter = command.CreateParameter();
             parameter.ParameterName = "@ID";
