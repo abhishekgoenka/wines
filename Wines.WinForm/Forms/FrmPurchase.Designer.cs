@@ -50,9 +50,14 @@
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.grid = new System.Windows.Forms.DataGridView();
+            this.label8 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.NBQty)).BeginInit();
             this.GBControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // CBOSupplier
@@ -61,7 +66,7 @@
             this.CBOSupplier.FormattingEnabled = true;
             this.CBOSupplier.Location = new System.Drawing.Point(135, 32);
             this.CBOSupplier.Name = "CBOSupplier";
-            this.CBOSupplier.Size = new System.Drawing.Size(321, 22);
+            this.CBOSupplier.Size = new System.Drawing.Size(202, 26);
             this.CBOSupplier.TabIndex = 10;
             // 
             // label2
@@ -69,61 +74,61 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(27, 40);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 14);
+            this.label2.Size = new System.Drawing.Size(66, 18);
             this.label2.TabIndex = 11;
             this.label2.Text = "Supplier";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(511, 40);
+            this.label1.Location = new System.Drawing.Point(488, 76);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 14);
+            this.label1.Size = new System.Drawing.Size(51, 18);
             this.label1.TabIndex = 12;
             this.label1.Text = "Brand";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 84);
+            this.label3.Location = new System.Drawing.Point(488, 35);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 14);
+            this.label3.Size = new System.Drawing.Size(115, 18);
             this.label3.TabIndex = 13;
             this.label3.Text = "Purchase Date";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 128);
+            this.label4.Location = new System.Drawing.Point(30, 163);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 14);
+            this.label4.Size = new System.Drawing.Size(42, 18);
             this.label4.TabIndex = 14;
             this.label4.Text = "Rate";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(511, 128);
+            this.label5.Location = new System.Drawing.Point(488, 114);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 14);
+            this.label5.Size = new System.Drawing.Size(130, 18);
             this.label5.TabIndex = 15;
-            this.label5.Text = "Quantity";
+            this.label5.Text = "Quantity(Loose)";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(27, 172);
+            this.label6.Location = new System.Drawing.Point(488, 155);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 14);
+            this.label6.Size = new System.Drawing.Size(67, 18);
             this.label6.TabIndex = 16;
             this.label6.Text = "Amount";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(511, 172);
+            this.label7.Location = new System.Drawing.Point(30, 197);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(79, 14);
+            this.label7.Size = new System.Drawing.Size(96, 18);
             this.label7.TabIndex = 17;
             this.label7.Text = "Diff Amount";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -132,51 +137,55 @@
             // 
             this.CboBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboBrand.FormattingEnabled = true;
-            this.CboBrand.Location = new System.Drawing.Point(606, 32);
+            this.CboBrand.Location = new System.Drawing.Point(627, 68);
             this.CboBrand.Name = "CboBrand";
-            this.CboBrand.Size = new System.Drawing.Size(321, 22);
+            this.CboBrand.Size = new System.Drawing.Size(330, 26);
             this.CboBrand.TabIndex = 18;
             // 
             // DTPurchaseDate
             // 
-            this.DTPurchaseDate.Location = new System.Drawing.Point(135, 76);
+            this.DTPurchaseDate.Location = new System.Drawing.Point(780, 29);
             this.DTPurchaseDate.Name = "DTPurchaseDate";
-            this.DTPurchaseDate.Size = new System.Drawing.Size(321, 22);
+            this.DTPurchaseDate.Size = new System.Drawing.Size(177, 26);
             this.DTPurchaseDate.TabIndex = 19;
             // 
             // TxtRate
             // 
-            this.TxtRate.Location = new System.Drawing.Point(135, 120);
+            this.TxtRate.Location = new System.Drawing.Point(223, 155);
             this.TxtRate.Name = "TxtRate";
-            this.TxtRate.Size = new System.Drawing.Size(114, 22);
+            this.TxtRate.Size = new System.Drawing.Size(114, 26);
             this.TxtRate.TabIndex = 20;
             this.TxtRate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtRate_KeyPress);
             // 
             // NBQty
             // 
-            this.NBQty.Location = new System.Drawing.Point(606, 120);
+            this.NBQty.Location = new System.Drawing.Point(627, 106);
             this.NBQty.Name = "NBQty";
-            this.NBQty.Size = new System.Drawing.Size(114, 22);
+            this.NBQty.Size = new System.Drawing.Size(114, 26);
             this.NBQty.TabIndex = 21;
             // 
             // TxtAmount
             // 
-            this.TxtAmount.Location = new System.Drawing.Point(135, 164);
+            this.TxtAmount.Location = new System.Drawing.Point(627, 155);
             this.TxtAmount.Name = "TxtAmount";
-            this.TxtAmount.Size = new System.Drawing.Size(114, 22);
+            this.TxtAmount.Size = new System.Drawing.Size(114, 26);
             this.TxtAmount.TabIndex = 22;
             this.TxtAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtRate_KeyPress);
             // 
             // TxtDiffAmount
             // 
-            this.TxtDiffAmount.Location = new System.Drawing.Point(606, 164);
+            this.TxtDiffAmount.Location = new System.Drawing.Point(223, 189);
             this.TxtDiffAmount.Name = "TxtDiffAmount";
-            this.TxtDiffAmount.Size = new System.Drawing.Size(114, 22);
+            this.TxtDiffAmount.Size = new System.Drawing.Size(114, 26);
             this.TxtDiffAmount.TabIndex = 23;
             this.TxtDiffAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtRate_KeyPress);
             // 
             // GBControls
             // 
+            this.GBControls.Controls.Add(this.label9);
+            this.GBControls.Controls.Add(this.comboBox1);
+            this.GBControls.Controls.Add(this.label8);
+            this.GBControls.Controls.Add(this.numericUpDown1);
             this.GBControls.Controls.Add(this.CboBrand);
             this.GBControls.Controls.Add(this.CBOSupplier);
             this.GBControls.Controls.Add(this.label2);
@@ -193,7 +202,7 @@
             this.GBControls.Controls.Add(this.DTPurchaseDate);
             this.GBControls.Location = new System.Drawing.Point(12, 12);
             this.GBControls.Name = "GBControls";
-            this.GBControls.Size = new System.Drawing.Size(1004, 243);
+            this.GBControls.Size = new System.Drawing.Size(1004, 230);
             this.GBControls.TabIndex = 24;
             this.GBControls.TabStop = false;
             // 
@@ -258,9 +267,43 @@
             this.grid.TabIndex = 30;
             this.grid.Click += new System.EventHandler(this.Grid_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(30, 120);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(146, 18);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "Quantity(Cartoon)";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(223, 112);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(114, 26);
+            this.numericUpDown1.TabIndex = 25;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(135, 73);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(202, 26);
+            this.comboBox1.TabIndex = 26;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(27, 81);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(43, 18);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "Type";
+            // 
             // FrmPurchase
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1028, 537);
             this.Controls.Add(this.grid);
@@ -283,6 +326,7 @@
             this.GBControls.ResumeLayout(false);
             this.GBControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -310,5 +354,9 @@
         private System.Windows.Forms.Button BtnEdit;
         private System.Windows.Forms.Button BtnAdd;
         private System.Windows.Forms.DataGridView grid;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label9;
     }
 }
