@@ -184,6 +184,27 @@ namespace Wines.WinForm.BCL
             return Helper.ConvertDataTable<BrandModel>(DataAccess.ExecuteSelectCommand(command));
         }
 
+
+        /// <summary>
+        /// Get all brands by category
+        /// </summary>
+        /// <param name="catID">Category id</param>
+        /// <returns></returns>
+        public DataTable GetAllBrandsByCategory(string catID)
+        {
+            var command = DataAccess.CreateCommand(CommandType.Text);
+            command.CommandText =
+                "SELECT ID, Liq_Name FROM Brands where Category = @cat group by Liq_name";
+
+            var parameter = command.CreateParameter();
+            parameter.ParameterName = "@cat";
+            parameter.Value = catID;
+            parameter.DbType = DbType.String;
+            command.Parameters.Add(parameter);
+
+            return DataAccess.ExecuteSelectCommand(command);
+        }
+
         public List<BrandModel> GetUniueqBrandName(string strLiqType)
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
@@ -289,6 +310,11 @@ namespace Wines.WinForm.BCL
             dr = dt.NewRow();
             dr["Name"] = "CL (Countery Liquore)";
             dr["Key"] = "CL";
+            dt.Rows.Add(dr);
+
+            dr = dt.NewRow();
+            dr["Name"] = "BEER";
+            dr["Key"] = "BEER";
             dt.Rows.Add(dr);
 
             return dt;

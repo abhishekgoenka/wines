@@ -24,14 +24,15 @@ namespace Wines.WinForm.Forms
         private void FrmPurchase_Load(object sender, EventArgs e)
         {
             Brand brand = new Brand();
-            CboBrand.DataSource = brand.GetAllBrands();
-            CboBrand.DisplayMember = "Liq_Name";
-            CboBrand.ValueMember = "ID";
+            CBOType.DisplayMember = "Name";
+            CBOType.ValueMember = "Key";
+            CBOType.DataSource = brand.GetAllCategories();
 
             Supplier supplier = new Supplier();
             CBOSupplier.DataSource = supplier.GetAllSuppliers();
             CBOSupplier.DisplayMember = "FullName";
             CBOSupplier.ValueMember = "ID";
+
 
             GBControls.Enabled = false;
             grid.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -170,6 +171,14 @@ namespace Wines.WinForm.Forms
                 purchase.Delete(purchaseid);
                 FillGrid();
             }
+        }
+
+        private void CBOType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Brand brand = new Brand();
+            CboBrand.DataSource = brand.GetAllBrandsByCategory(CBOType.SelectedValue.ToString());
+            CboBrand.DisplayMember = "Liq_Name";
+            CboBrand.ValueMember = "ID";
         }
     }
 }

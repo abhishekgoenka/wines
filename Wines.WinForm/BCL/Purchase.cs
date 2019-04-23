@@ -194,5 +194,10 @@ namespace Wines.WinForm.BCL
 
             return DataAccess.ExecuteNonQuery(command);
         }
+
+        public DataTable GetAllTypes()
+        {
+            return null;
+        }
     }
 }
