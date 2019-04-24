@@ -47,7 +47,7 @@ namespace Wines.WinForm.BCL
 
             parameter = command.CreateParameter();
             parameter.ParameterName = "@Modify_Date";
-            parameter.Value = dtModify_Date;
+            parameter.Value = DateTime.Today;
             parameter.DbType = DbType.String;
             command.Parameters.Add(parameter);
 
@@ -137,7 +137,7 @@ namespace Wines.WinForm.BCL
 
             parameter = command.CreateParameter();
             parameter.ParameterName = "@Modify_Date";
-            parameter.Value = dtModify_Date;
+            parameter.Value = DateTime.Today;
             parameter.DbType = DbType.String;
             command.Parameters.Add(parameter);
 
@@ -200,7 +200,7 @@ namespace Wines.WinForm.BCL
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
             command.CommandText =
-                "SELECT ID, Shop_ID, Branch_ID, Sale_Date, Modify_Date, " +
+                "SELECT ID, Shop_ID, Branch_ID, Sale_Date, Modify_Date," +
                 "Previous_Amt, Sale_Amt_With_Comm, Commission_Amt, Sale_Amt_After_Comm, " +
                 "Deposit, Balance, Reserve1 FROM Branch_Sale_Summary";
 
@@ -218,8 +218,13 @@ namespace Wines.WinForm.BCL
             command.CommandText =
                 "SELECT ID, Shop_ID, Branch_ID, Sale_Date, Modify_Date, " +
                 "Previous_Amt, Sale_Amt_With_Comm, Commission_Amt, Sale_Amt_After_Comm, " +
-                "Deposit, Balance, Reserve1 FROM Branch_Sale_Summary ";
-            command.CommandText += " WHERE 1=1 ORDER BY ID DESC LIMIT 1 ";
+                "Deposit, Balance, Reserve1 FROM Branch_Sale_Summary";
+
+            //command.CommandText =
+            //    "SELECT ID, Shop_ID, Branch_ID, Sale_Date, Modify_Date, " +
+            //    "Previous_Amt, Sale_Amt_With_Comm, Commission_Amt, Sale_Amt_After_Comm, " +
+            //    "Deposit, Balance, Reserve1 FROM Branch_Sale_Summary ";
+//            command.CommandText += " WHERE 1=1 ORDER BY ID DESC";
 
             return Helper.ConvertDataTable<BranchSaleModel>(DataAccess.ExecuteSelectCommand(command));
         }
