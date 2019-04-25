@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Wines.WinForm.BCL;
 using Wines.WinForm.ExtensionMethods;
+using Wines.WinForm.Models;
 
 namespace Wines.WinForm.Forms
 {
@@ -16,6 +18,7 @@ namespace Wines.WinForm.Forms
     {
         private long purchaseid;
         Purchase purchase = new Purchase();
+        private decimal actualAmount = 0;
         public FrmPurchase()
         {
             InitializeComponent();
@@ -38,7 +41,7 @@ namespace Wines.WinForm.Forms
             grid.EditMode = DataGridViewEditMode.EditProgrammatically;
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grid.AllowUserToAddRows = false;
-
+            actualAmount = 0;
 
             FillGrid();
 
@@ -179,6 +182,53 @@ namespace Wines.WinForm.Forms
             CboBrand.DataSource = brand.GetAllBrandsByCategory(CBOType.SelectedValue.ToString());
             CboBrand.DisplayMember = "Liq_Name";
             CboBrand.ValueMember = "ID";
+        }
+
+        private void CboBrand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Brand brand = new Brand();
+            CboSize.DataSource = brand.GetAllBrandsSize(CboBrand.Text);
+            CboSize.DisplayMember = "Weight";
+            CboSize.ValueMember = "ID";
+        }
+
+        private void CboSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Brand brand = new Brand();
+            BrandModel brandModel = brand.GetBrandDetail(CboSize.SelectedValue.ToInt64()).FirstOrDefault();
+            if (brandModel != null)
+            {
+                TxtRate.Text = brandModel.Purchase_Rate.ToString("F", CultureInfo.InvariantCulture);
+            }
+        }
+
+        private void NBQtyCartoon_ValueChanged(object sender, EventArgs e)
+        {
+            Brand brand = new Brand();
+            BrandModel brandModel = brand.GetBrandDetail(CboSize.SelectedValue.ToInt64()).FirstOrDefault();
+            if (brandModel != null)
+            {
+                NBQty.Value = NBQtyCartoon.Value * brandModel.Box;
+            }
+        }
+
+        private void NBQty_ValueChanged(object sender, EventArgs e)
+        {
+            Brand brand = new Brand();
+            BrandModel brandModel = brand.GetBrandDetail(CboSize.SelectedValue.ToInt64()).FirstOrDefault();
+            if (brandModel != null)
+            {
+                actualAmount = NBQty.Value * brandModel.Purchase_Rate;
+                TxtAmount.Text = $@"{actualAmount:N2}";
+            }
+        }
+
+        private void TxtAmount_TextChanged(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(TxtAmount.Text, out var val))
+            {
+                TxtDiffAmount.Text = $@"{val - actualAmount:N2}";
+            }
         }
     }
 }

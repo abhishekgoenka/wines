@@ -236,6 +236,22 @@ namespace Wines.WinForm.BCL
             return Helper.ConvertDataTable<BrandModel>(DataAccess.ExecuteSelectCommand(command));
         }
 
+
+        public DataTable GetAllBrandsSize(string Liq_Name)
+        {
+            var command = DataAccess.CreateCommand(CommandType.Text);
+            command.CommandText =
+                "Select ID, Weight from Brands where Liq_name = @liq";
+
+            var parameter = command.CreateParameter();
+            parameter.ParameterName = "@liq";
+            parameter.Value = Liq_Name;
+            parameter.DbType = DbType.String;
+            command.Parameters.Add(parameter);
+
+            return DataAccess.ExecuteSelectCommand(command);
+        }
+
         public List<BrandModel> GetBrandDetail(string strLiqType, string strBrandName, long lngWeight )
         {
             var command = DataAccess.CreateCommand(CommandType.Text);
